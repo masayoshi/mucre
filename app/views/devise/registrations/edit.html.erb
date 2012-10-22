@@ -1,0 +1,47 @@
+<div class="page-header">
+  <h1>Edit <%= resource_name.to_s.humanize %></h1>
+</div>
+<div class="row">
+  <div class="span8">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "form-horizontal"}) do |f| %>
+      <%= render "devise/shared/errors", resource: resource if resource.errors.any? %>
+      <div class="control-group">
+        <%= f.label :email, class: "control-label" %>
+        <div class="controls">
+          <%= f.email_field :email, placeholder: "Email" %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password, class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password, autocomplete: "off", placeholder: "New Password"  %>
+          <span class="help-block">leave blank if you don't want to change it</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password_confirmation, class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :password_confirmation, placeholder: "Confirm New Password"  %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :current_password, class: "control-label" %>
+        <div class="controls">
+          <%= f.password_field :current_password, placeholder: "Current Password"  %>
+          <span class="help-block">we need your current password to confirm your changes</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update", class: "btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="span4">
+    <div class="well">
+      <h3>Cancel my account</h3>
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>.</p>
+    </div>
+  </div>
+</div>

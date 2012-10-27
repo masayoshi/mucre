@@ -1,3 +1,31 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  username               :string(255)
+#  name                   :string(255)
+#  biography              :text
+#  url                    :string(255)
+#  image_url              :string(255)
+#
+
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
@@ -22,13 +50,14 @@ class User < ActiveRecord::Base
       if current_user.present?
         user = current_user
       else
-        user = User.create!({
+        user = User.create({
           password: Devise.friendly_token[0,20],
           username: auth.info.nickname,
           email: dummy_email,
           image_url: auth.info.image,
         })
         user.skip_confirmation!
+        user.save
       end
       user.authentications.create!({
         provider: "twitter",
@@ -53,13 +82,14 @@ class User < ActiveRecord::Base
       elsif User.exists?(email: auth.info.email)
         user = User.find_by_email(auth.info.email)
       else
-        user = User.create!({
+        user = User.create({
           password: Devise.friendly_token[0,20],
           username: auth.info.nickname,
           email: auth.info.email,
           image_url: auth.info.image,
         })
         user.skip_confirmation!
+        user.save
       end
       user.authentications.create!({
         provider: "facebook",

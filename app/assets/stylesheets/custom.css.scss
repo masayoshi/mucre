@@ -22,3 +22,7 @@ body {
   background-color: #f2dede;
   border-color: #eed3d7;
 }
+
+.nav > .active > a > [class^="icon-"], .nav > .active > a > [class*=" icon-"] {
+  background-image: none;
+}

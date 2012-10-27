@@ -6,6 +6,13 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "form-horizontal"}) do |f| %>
       <%= render "devise/shared/errors", resource: resource if resource.errors.any? %>
       <div class="control-group">
+        <%= f.label :username, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :username, placeholder: "Username" %>
+          <span class="help-block">Only use letters, numbers and '_'</span>
+        </div>
+      </div>
+      <div class="control-group">
         <%= f.label :email, class: "control-label" %>
         <div class="controls">
           <%= f.email_field :email, placeholder: "Email" %>
@@ -24,13 +31,15 @@
           <%= f.password_field :password_confirmation, placeholder: "Confirm New Password"  %>
         </div>
       </div>
-      <div class="control-group">
-        <%= f.label :current_password, class: "control-label" %>
-        <div class="controls">
-          <%= f.password_field :current_password, placeholder: "Current Password"  %>
-          <span class="help-block">we need your current password to confirm your changes</span>
+      <% if current_user.authentications.blank? %>
+        <div class="control-group">
+          <%= f.label :current_password, class: "control-label" %>
+          <div class="controls">
+            <%= f.password_field :current_password, placeholder: "Current Password"  %>
+            <span class="help-block">we need your current password to confirm your changes</span>
+          </div>
         </div>
-      </div>
+      <% end %>
       <div class="control-group">
         <div class="controls">
           <%= f.submit "Update", class: "btn" %>
@@ -39,6 +48,13 @@
     <% end %>
   </div>
   <div class="span4">
+    <div class="well">
+      <% if devise_mapping.omniauthable? %>
+        <% resource_class.omniauth_providers.each do |provider| %>
+          <li><%= link_to "Sign in with #{provider.to_s.titleize}<i class='icon-twitter icon-large'></i>".html_safe, omniauth_authorize_path(resource_name, provider) %></li>
+        <% end %>
+      <% end %>
+    </div>
     <div class="well">
       <h3>Cancel my account</h3>
       <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>.</p>

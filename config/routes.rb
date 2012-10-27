@@ -1,5 +1,5 @@
 Mucre::Application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
   match '/about', to: 'static_pages#about'
   match '/policy', to: 'static_pages#policy'

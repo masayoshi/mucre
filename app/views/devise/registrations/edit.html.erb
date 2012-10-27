@@ -50,9 +50,11 @@
   <div class="span4">
     <div class="well">
       <% if devise_mapping.omniauthable? %>
+        <ul class="nav nav-list">
         <% resource_class.omniauth_providers.each do |provider| %>
-          <li><%= link_to "Sign in with #{provider.to_s.titleize}<i class='icon-twitter icon-large'></i>".html_safe, omniauth_authorize_path(resource_name, provider) %></li>
+          <li><%= link_to "Connect with #{provider.to_s.titleize}<i class='icon-#{provider.to_s} icon-large'></i>".html_safe, omniauth_authorize_path(resource_name, provider) %></li>
         <% end %>
+        <ul>
       <% end %>
     </div>
     <div class="well">

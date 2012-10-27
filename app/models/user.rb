@@ -41,6 +41,36 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def self.find_for_facebook_oauth(auth, current_user = nil)
+    authentication = Authentication.find_by_provider_and_uid("facebook", auth.uid.to_s)
+    logger.info auth.to_yaml
+
+    if authentication.present?
+      user = authentication.user
+    else
+      if current_user.present?
+        user = current_user
+      elsif User.exists?(email: auth.info.email)
+        user = User.find_by_email(auth.info.email)
+      else
+        user = User.create!({
+          password: Devise.friendly_token[0,20],
+          username: auth.info.nickname,
+          email: auth.info.email,
+          image_url: auth.info.image,
+        })
+        user.skip_confirmation!
+      end
+      user.authentications.create!({
+        provider: "facebook",
+        uid: auth.uid.to_s,
+        token: auth.credentials.token,
+        image_url: auth.info.image
+      })
+    end
+    return user
+  end
+
   # Skip password require validation if user have authentications
   def password_required?
     super && authentications.blank?

@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   validates :name, length: { within: 3..100 }, allow_blank: true
   validates :biography, length: { maximum: 1000 }
   validates :url, format: {with: URI::regexp(%w(http https))}, allow_blank: true
+  validates_confirmation_of :password
 
   before_save :fill_image_url
 

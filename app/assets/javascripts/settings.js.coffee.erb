@@ -1,0 +1,4 @@
+jQuery ->
+  $('#user_tag_list').select2({
+    tags: <%= User.tag_counts.map(&:name).to_json.html_safe %>,
+    tokenSeparators: [",", " "]})

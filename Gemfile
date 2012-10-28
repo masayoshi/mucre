@@ -10,6 +10,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'gravatar_image_tag'
 gem 'acts-as-taggable-on'
+gem 'select2-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

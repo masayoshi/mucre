@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
       if current_user.present?
         user = current_user
       else
-        user = User.create({
+        user = User.new({
           password: Devise.friendly_token[0,20],
           username: auth.info.nickname,
           email: dummy_email,
@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
       elsif User.exists?(email: auth.info.email)
         user = User.find_by_email(auth.info.email)
       else
-        user = User.create({
+        user = User.new({
           password: Devise.friendly_token[0,20],
           username: auth.info.nickname,
           email: auth.info.email,

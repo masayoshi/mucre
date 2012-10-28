@@ -28,6 +28,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'annotate', ">=2.5.0"
+  gem 'pry-rails'
 end
 
 group :test do

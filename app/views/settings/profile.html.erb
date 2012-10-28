@@ -46,6 +46,13 @@
         </div>
       </div>
       <div class="control-group">
+        <%= f.label :tag_list, "タグ", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :tag_list, placeholder: "音楽, 演劇, Photo" , class: "input-xxlarge" %>
+          <p class="help-block">アーティスト活動のジャンルやキーワードを入力してください</p>
+        </div>
+      </div>
+      <div class="control-group">
         <%= f.label :url, "ホームページ", class: "control-label" %>
         <div class="controls">
           <%= f.url_field :url, placeholder: "URL" %>

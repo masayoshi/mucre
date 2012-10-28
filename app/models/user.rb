@@ -41,6 +41,9 @@ class User < ActiveRecord::Base
 
   before_save :fill_image_url
 
+  acts_as_taggable
+  attr_accessible :tag_list
+
   has_many :authentications, dependent: :destroy
 
   def self.find_for_twitter_oauth(auth, current_user = nil)

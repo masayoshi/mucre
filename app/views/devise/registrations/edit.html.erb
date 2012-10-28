@@ -1,8 +1,11 @@
-<div class="page-header">
-  <h1>Edit <%= resource_name.to_s.humanize %></h1>
-</div>
 <div class="row">
-  <div class="span8">
+  <div class="span3">
+    <%= render 'settings/side_nav' %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h2>Account <small>Change your basic account and password.</small></h2>
+    </div>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "form-horizontal"}) do |f| %>
       <%= render "devise/shared/errors", resource: resource if resource.errors.any? %>
       <div class="control-group">
@@ -40,26 +43,10 @@
           </div>
         </div>
       <% end %>
-      <div class="control-group">
-        <div class="controls">
-          <%= f.submit "Update", class: "btn" %>
-        </div>
+      <div class="form-actions">
+        <%= f.submit "Save Changes", class: "btn btn-primary" %>
       </div>
     <% end %>
-  </div>
-  <div class="span4">
-    <div class="well">
-      <% if devise_mapping.omniauthable? %>
-        <ul class="nav nav-list">
-        <% resource_class.omniauth_providers.each do |provider| %>
-          <li><%= link_to "Connect with #{provider.to_s.titleize}<i class='icon-#{provider.to_s} icon-large'></i>".html_safe, omniauth_authorize_path(resource_name, provider) %></li>
-        <% end %>
-        <ul>
-      <% end %>
-    </div>
-    <div class="well">
-      <h3>Cancel my account</h3>
-      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>.</p>
-    </div>
+    <p><%= link_to "このアカウントを削除する", registration_path(resource_name), confirm: "本当に退会してよろしいですか?", method: :delete %></p>
   </div>
 </div>

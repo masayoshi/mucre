@@ -1,5 +1,11 @@
 Mucre::Application.routes.draw do
-  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"} do
+    match "/settings/account", to: "devise/registrations#edit"
+  end
+
+  get "/settings/profile"
+  get "/settings/services"
+  put "/settings/update"
 
   match '/about', to: 'static_pages#about'
   match '/policy', to: 'static_pages#policy'

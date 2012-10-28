@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="span3">
+    <%= render 'settings/side_nav' %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h2>Sevices <small>Connect your account with Twitter and Facebook.</small></h2>
+    </div>
+      <p>
+      <%= link_to "Connect with Twitter <i class='icon-twitter icon-large'></i>".html_safe,
+        omniauth_authorize_path(current_user, "twitter"), class: "btn btn-info" if @authentication_twitter.blank? %>
+      <%= link_to "Connect with Facebook <i class='icon-facebook icon-large'></i>".html_safe,
+        omniauth_authorize_path(current_user, "facebook"), class: "btn btn-primary" if @authentication_facebook.blank? %>
+      <% if @authentication_twitter.present? %>
+        <%= image_tag @authentication_twitter.image_url %>
+        <%= link_to "Twitter <i class='icon-twitter icon-large'></i>".html_safe, twitter_account_url(@authentication_twitter.uid), target: "_blank" %>
+      <% end %>
+      <% if @authentication_facebook.present? %>
+        <%= image_tag @authentication_facebook.image_url %>
+        <%= link_to "Facebook <i class='icon-facebook icon-large'></i>".html_safe, facebook_account_url(@authentication_facebook.uid), target: "_blank" %>
+      <% end %>
+      </p>
+  </div>
+</div>

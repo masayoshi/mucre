@@ -30,12 +30,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :username, :image_url
+  attr_accessible :username, :image_url, :name, :url, :biography
 
-  validates_presence_of :username
-  validates_uniqueness_of :username
+  validates :username, presence: true, length: { within: 3..50 }, uniqueness: true, format: { with: /\A[_a-zA-Z0-9]+\Z/ } # only A..Za..z0..9-_
+  validates :name, length: { within: 3..100 }, allow_blank: true
+  validates :biography, length: { maximum: 1000 }
+  validates :url, format: {with: URI::regexp(%w(http https))}, allow_blank: true
+
+  before_save :fill_image_url
 
   has_many :authentications, dependent: :destroy
 
@@ -113,5 +116,11 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+
+  private
+
+  def fill_image_url
+    self.image_url ||= GravatarImageTag::gravatar_url(self.email).gsub("&amp;","&")
   end
 end

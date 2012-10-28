@@ -1,6 +1,6 @@
 <div class="alert alert-block alert-error">
   <button type="button" class="close" data-dismiss="alert">×</button>
-  <h2><%= pluralize(resource.errors.count, "error") %> prohibited this <%= resource_name %> from being saved:</h2>
+  <h2><%= pluralize(resource.errors.count, "error") %> prohibited from being saved:</h2>
 
   <ul>
     <% resource.errors.full_messages.each do |msg| %>

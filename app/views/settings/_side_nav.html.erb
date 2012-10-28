@@ -1,0 +1,11 @@
+<div class="well">
+  <%= image_tag current_user.image_url %>
+  <b><%= current_user.username %></b>
+</div>
+<div class="well">
+  <ul class="nav nav-list">
+    <li<%= " class='active'".html_safe if current_page?(settings_account_path) %>><%= link_to "<i class='icon-chevron-right'></i> Account".html_safe, settings_account_path %></li>
+    <li<%= " class='active'".html_safe if current_page?(settings_profile_path) %>><%= link_to "<i class='icon-chevron-right'></i> Profile".html_safe, settings_profile_path %></li>
+    <li<%= " class='active'".html_safe if current_page?(settings_services_path) %>><%= link_to "<i class='icon-chevron-right'></i> Services".html_safe, settings_services_path %></li>
+  </ul>
+</div>

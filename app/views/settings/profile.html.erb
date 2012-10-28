@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="span3">
+    <%= render 'settings/side_nav' %>
+  </div>
+  <div class="span9">
+    <div class="page-header">
+      <h2>Profile <small>This information appears on your public profile, search results, and beyond.</small></h2>
+    </div>
+    <%= form_for @user, url: settings_update_path, html: {method: :put, class: "form-horizontal"} do |f| %>
+      <%= render "devise/shared/errors", resource: @user if @user.errors.any? %>
+      <div class="control-group">
+        <%= f.label :image_url, "アイコン", class: "control-label" %>
+        <div class="controls">
+          <%= image_tag @user.image_url if @user.image_url.present? %>
+          <hr/>
+          <% if current_user.authentications.present? %>
+            <label class="radio">
+              <%= gravatar_image_tag(current_user.email, alt: current_user.username ) %>
+              <input id="image_url" <%= "checked" if current_user.image_url.gsub("&","&amp;") == GravatarImageTag::gravatar_url(current_user.email) %> type="radio" name="user[image_url]" value="<%= GravatarImageTag::gravatar_url(current_user.email).html_safe %>">
+              <%= link_to "デフォルトアイコンの変更(Gravatar)","http://ja.gravatar.com/emails/", :target => "_blank" %>
+            </label>
+            <% if @authentication_twitter.present? %>
+              <label class="radio">
+                <%= image_tag @authentication_twitter.image_url %>
+                <input id="image_url" <%= "checked" if current_user.image_url == @authentication_twitter.image_url %> type="radio" name="user[image_url]" value="<%= @authentication_twitter.image_url %>">
+                Twitterのプロフィール画像を使う
+              </label>
+            <% end %>
+            <% if @authentication_facebook.present? %>
+              <label class="radio">
+                <%= image_tag @authentication_facebook.image_url %>
+                <input id="image_url" <%= "checked" if current_user.image_url == @authentication_facebook.image_url %> type="radio" name="user[image_url]" value="<%= @authentication_facebook.image_url %>">
+                Facebookのプロフィール画像を使う
+              </label>
+            <% end %>
+          <% end %>
+          <p class="help-block">MuseumCreated.comでは、<%= link_to "Gravatar","http://ja.gravatar.com/", :target => "_blank"%>を用いてアイコン表示をしています。<br />まだGravatarのアカウントをお持ちでない方は<%= link_to "こちら","http://ja.gravatar.com/site/signup/", :target => "_blank"%>から登録してください。また、外部のサービス(Facebook,Twitter)のプロフィール画像を利用する場合は、<%= link_to "こちら", settings_services_path %>から連携してください。</p>
+        </div>
+      </div>
+      <hr />
+      <div class="control-group">
+        <%= f.label :name, "名前", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :name, placeholder: "Name" %>
+          <p class="help-block">みんなが見つけられるように、普段使っているアーティスト名を入力しましょう</p>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :url, "ホームページ", class: "control-label" %>
+        <div class="controls">
+          <%= f.url_field :url, placeholder: "URL" %>
+          <p class="help-block">ホームページやブログをお持ちでしたら、ここにアドレスを入力してください</p>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :biography, "自己紹介", class: "control-label" %>
+        <div class="controls">
+          <%= f.text_area :biography, class: "input-xxlarge", rows: "10" %>
+          <p class="help-block">1000文字以内で自己紹介してください</p>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= f.submit "Save Changes", class: "btn btn-info" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -12,6 +12,7 @@ gem 'gravatar_image_tag'
 gem 'acts-as-taggable-on'
 gem 'select2-rails'
 gem 'tinymce-rails'
+gem 'geocoder'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

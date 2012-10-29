@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   attr_accessible :tag_list
 
   has_many :authentications, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   def self.find_for_twitter_oauth(auth, current_user = nil)
     authentication = Authentication.find_by_provider_and_uid("twitter", auth.uid.to_s)

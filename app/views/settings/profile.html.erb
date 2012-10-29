@@ -9,7 +9,7 @@
     <%= form_for @user, url: settings_update_path, html: {method: :put, class: "form-horizontal"} do |f| %>
       <%= render "devise/shared/errors", resource: @user if @user.errors.any? %>
       <div class="control-group">
-        <%= f.label :image_url, "<i class='icon-camera icon-large'></i> アイコン".html_safe, class: "control-label" %>
+        <%= f.label :image_url, "アイコン", class: "control-label" %>
         <div class="controls">
           <%= image_tag @user.image_url if @user.image_url.present? %>
           <hr/>
@@ -39,30 +39,31 @@
       </div>
       <hr />
       <div class="control-group">
-        <%= f.label :name, "<i class='icon-user icon-large'></i> 名前".html_safe, class: "control-label" %>
+        <%= f.label :name, "名前", class: "control-label" %>
         <div class="controls">
           <%= f.text_field :name, placeholder: "Name" %>
           <p class="help-block">みんなが見つけられるように、普段使っているアーティスト名を入力しましょう</p>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :tag_list, "<i class='icon-tags icon-large'></i> タグ".html_safe, class: "control-label" %>
+        <%= f.label :tag_list, "タグ", class: "control-label" %>
         <div class="controls">
           <%= f.text_field :tag_list, placeholder: "音楽, 演劇, Photo" , class: "input-xxlarge" %>
           <p class="help-block">アーティスト活動のジャンルやキーワードを入力してください</p>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :url, "<i class='icon-globe icon-large'></i> ホームページ".html_safe, class: "control-label" %>
+        <%= f.label :url, "ホームページ", class: "control-label" %>
         <div class="controls">
           <%= f.url_field :url, placeholder: "URL" %>
           <p class="help-block">ホームページやブログをお持ちでしたら、ここにアドレスを入力してください</p>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :biography, "<i class='icon-book icon-large'></i> 自己紹介".html_safe, class: "control-label" %>
+        <%= f.label :biography, "自己紹介", class: "control-label" %>
         <div class="controls">
-          <%= f.text_area :biography, class: "input-xxlarge", rows: "10" %>
+          <%= f.text_area :biography, class: "tinymce", id: "editor" %>
+          <%= tinymce %>
           <p class="help-block">1000文字以内で自己紹介してください</p>
         </div>
       </div>

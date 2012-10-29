@@ -1,53 +1,90 @@
-<%= form_for(@event) do |f| %>
+<%= form_for(@event, html: {class: "form-horizontal"}) do |f| %>
   <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+    <div class="alert alert-block alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</strong>
 
       <ul>
-      <% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="control-group">
+    <%= f.label :title, "イベント名", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :title, placeholder: "Event Title" %>
+      <span class="help-block">イベント名を入力してください</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :place %><br />
-    <%= f.text_field :place %>
+  <div class="control-group">
+    <%= f.label :start_datetime, '日時', class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :start_date, class: "datepicker input-small" %>
+      <div class="input-append bootstrap-timepicker-component">
+        <%= f.text_field :start_time, class: "timepicker-default input-small" %>
+        <span class="add-on">
+          <i class="icon-time"></i>
+        </span>
+      </div>
+      -
+      <%= f.text_field :end_date, class: "datepicker input-small" %>
+      <div class="input-append bootstrap-timepicker-component">
+        <%= f.text_field :end_time, class: "timepicker-default input-small" %>
+        <span class="add-on">
+          <i class="icon-time"></i>
+        </span>
+      </div>
+      <p class="help-block">イベントの開始、終了時間を登録してください。</p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
+  <div class="control-group">
+    <%= f.label :place, "会場", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :place, placeholder: "Event Place" %>
+      <span class="help-block">イベント会場を入力してください</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+  <div class="control-group">
+    <%= f.label :address, "会場住所", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :address, placeholder: "Address", class: "input-xlarge" %>
+      <span class="help-block">会場の住所を入力してください</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
+  <div class="control-group">
+    <%= f.label :description, "イベント詳細", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_area :description, class: "tinymce", id: "editor" %>
+      <%= tinymce %>
+      <p class="help-block">1000文字以内でイベント詳細を記述してください</p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :fee %><br />
-    <%= f.number_field :fee %>
+  <div class="control-group">
+    <%= f.label :url, "ホームページ", class: "control-label" %>
+    <div class="controls">
+      <%= f.url_field :url, placeholder: "URL", class: "input-xlarge" %>
+      <p class="help-block">イベントのホームページやブログがあれば、ここにアドレスを入力してください</p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :start_datetime %><br />
-    <%= f.datetime_select :start_datetime %>
+  <div class="control-group">
+    <%= f.label :fee, "料金", class: "control-label" %>
+    <div class="controls">
+      <div class="input-append">
+        <%= f.number_field :fee %><span class="add-on">円</span>
+      </div>
+      <p class="help-block">イベントの料金を入力してください</p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :tag_list %><br />
-    <%= f.text_field :tag_list %>
+  <div class="control-group">
+    <%= f.label :tag_list, "タグ", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :tag_list, placeholder: "ライブ, 演劇, 個展" , class: "input-xxlarge" %>
+      <p class="help-block">イベントに関係するキーワードを入力してください</p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :end_datetime %><br />
-    <%= f.datetime_select :end_datetime %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit "登録", class: "btn btn-primary" %>
   </div>
 <% end %>

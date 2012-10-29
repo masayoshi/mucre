@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028164047) do
+ActiveRecord::Schema.define(:version => 20121029022417) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider",   :null => false
@@ -26,6 +26,26 @@ ActiveRecord::Schema.define(:version => 20121028164047) do
 
   add_index "authentications", ["provider", "uid"], :name => "index_authentications_on_provider_and_uid", :unique => true
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.string   "place"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "fee",            :default => 0, :null => false
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
+    t.integer  "user_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "events", ["end_datetime"], :name => "index_events_on_end_datetime"
+  add_index "events", ["fee"], :name => "index_events_on_fee"
+  add_index "events", ["start_datetime"], :name => "index_events_on_start_datetime"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

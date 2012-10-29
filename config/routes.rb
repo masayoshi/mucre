@@ -1,4 +1,6 @@
 Mucre::Application.routes.draw do
+  resources :events
+
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"} do
     match "/settings/account", to: "devise/registrations#edit"
   end

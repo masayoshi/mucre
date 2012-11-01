@@ -27,3 +27,18 @@ body {
 .nav > .active > a > [class^="icon-"], .nav > .active > a > [class*=" icon-"] {
   background-image: none;
 }
+
+.small_avator {
+  height: 20px;
+  width: 20px;
+}
+
+.form-horizontal .control-group .controls .field_with_errors > input {
+  color: #b94a48;
+  border-color: #b94a48;
+}
+
+.form-horizontal .control-group .controls .field_with_errors > textarea {
+  color: #b94a48;
+  border-color: #b94a48;
+}

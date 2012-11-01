@@ -15,6 +15,7 @@ class Event < ActiveRecord::Base
 
   before_validation :geocode, if: :address_changed?
   acts_as_taggable
+  acts_as_gmappable process_geocoding: false
 
   def get_datetimes
     self.start_datetime ||= Time.now  # if the start_datetime is not set, set it to now
@@ -29,5 +30,15 @@ class Event < ActiveRecord::Base
   def set_datetimes
     self.start_datetime = "#{self.start_date} #{self.start_time}" # convert the two fields back to db
     self.end_datetime = "#{self.end_date} #{self.end_time}" # convert the two fields back to db
+  end
+
+  def gmaps4rails_address
+    address
+  end
+
+  def gmaps4rails_infowindow
+    result = "<h2>#{title}</h2>"
+    result += "<p>#{description}</p><br>" if description.present?
+    result += "<a href='/artists/#{self.user.username}'>#{self.user.username}</a>"
   end
 end

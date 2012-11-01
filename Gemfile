@@ -13,6 +13,9 @@ gem 'acts-as-taggable-on'
 gem 'select2-rails'
 gem 'tinymce-rails'
 gem 'geocoder'
+gem 'gmaps4rails'
+gem 'will_paginate', '~> 3.0'
+gem 'bootstrap-will_paginate'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -33,6 +36,7 @@ group :development do
   gem 'guard-livereload'
   gem 'annotate', ">=2.5.0"
   gem 'pry-rails'
+  gem 'faker'
 end
 
 group :test do

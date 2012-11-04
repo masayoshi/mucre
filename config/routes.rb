@@ -1,17 +1,21 @@
 Mucre::Application.routes.draw do
+
   resources :events
 
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"} do
     match "/settings/account", to: "devise/registrations#edit"
   end
 
+  match "/artists", to: "artists#index", as: "artists", via: :get
+  match "/artists/:username", to: "artists#show", as: "artist", via: :get
+
   get "/settings/profile"
   get "/settings/services"
   put "/settings/update"
 
-  match '/about', to: 'static_pages#about'
-  match '/policy', to: 'static_pages#policy'
-  match '/help', to: 'static_pages#help'
+  match '/about', to: 'static_pages#about', via: :get
+  match '/policy', to: 'static_pages#policy', via: :get
+  match '/help', to: 'static_pages#help', via: :get
   root to: 'static_pages#home'
 end
 #== Route Map

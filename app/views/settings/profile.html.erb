@@ -11,25 +11,25 @@
       <div class="control-group">
         <%= f.label :image_url, "アイコン", class: "control-label" %>
         <div class="controls">
-          <%= image_tag @user.image_url if @user.image_url.present? %>
+          <%= image_tag @user.image_url, class: "img-rounded img-polaroid" %>
           <hr/>
           <% if current_user.authentications.present? %>
             <% if @authentication_twitter.present? %>
               <label class="radio">
-                <%= image_tag @authentication_twitter.image_url %>
+                <%= image_tag @authentication_twitter.image_url, class: "img-rounded img-polaroid" %>
                 <input id="image_url" <%= "checked" if current_user.image_url == @authentication_twitter.image_url %> type="radio" name="user[image_url]" value="<%= @authentication_twitter.image_url %>">
                 Twitterのプロフィール画像を使う
               </label>
             <% end %>
             <% if @authentication_facebook.present? %>
               <label class="radio">
-                <%= image_tag @authentication_facebook.image_url %>
+                <%= image_tag @authentication_facebook.image_url, class: "img-rounded img-polaroid" %>
                 <input id="image_url" <%= "checked" if current_user.image_url == @authentication_facebook.image_url %> type="radio" name="user[image_url]" value="<%= @authentication_facebook.image_url %>">
                 Facebookのプロフィール画像を使う
               </label>
             <% end %>
             <label class="radio">
-              <%= gravatar_image_tag(current_user.email, alt: current_user.username ) %>
+              <%= gravatar_image_tag(current_user.email, alt: current_user.username, class: "img-rounded img-polaroid" ) %>
               <input id="image_url" <%= "checked" if current_user.image_url.gsub("&","&amp;") == GravatarImageTag::gravatar_url(current_user.email) %> type="radio" name="user[image_url]" value="<%= GravatarImageTag::gravatar_url(current_user.email).html_safe %>">
               <%= link_to "デフォルトアイコンの変更(Gravatar)","http://ja.gravatar.com/emails/", :target => "_blank" %>
             </label>
@@ -64,7 +64,7 @@
         <div class="controls">
           <%= f.text_area :biography, class: "tinymce", id: "editor" %>
           <%= tinymce %>
-          <p class="help-block">1000文字以内で自己紹介してください</p>
+          <p class="help-block">3000文字以内で自己紹介してください</p>
         </div>
       </div>
       <div class="form-actions">

@@ -1,9 +1,10 @@
 <div class="row-fluid">
   <div class="span12">
-    <h5><%= link_to event.title, event_path(event) %></h5>
+    <h4><%= link_to event.title, event_path(event) %></h4>
     <p>
-    <i class="icon-calendar"></i> <%= event.start_date + " " + event.start_time + " - " + event.end_date + " " + event.end_time %><br />
-    <%= link_to "<i class='icon-globe'></i> #{event.url}".html_safe , event.url, target: "_blank" if event.url.present? %><br />
+    <h4><i class="icon-calendar"></i> <small>開催日時</small>
+      <%= event.start_date + " " + event.start_time %> <small><i class="icon-caret-right"></i></small> <%= event.end_date + " " + event.end_time %>
+    </h4>
     <% if event.tag_list.present? %>
       <i class="icon-tags"></i>
       <% event.tags.each do |tag| %>
@@ -16,7 +17,7 @@
     <% end %>
     <blockquote>
       <p><%= truncate Sanitize.clean(event.description, Sanitize::Config::RESTRICTED), length: 80 %></p>
-      <small>Posted by <%= link_to image_tag(event.user.image_url, class: "small_avator img-rounded"), "" %> <%= link_to event.user.username, ""%> at <%= event.created_at.to_s(:db) %></small>
+      <small>Posted by <%= link_to image_tag(event.user.image_url, class: "small_avator img-rounded"), artist_path(event.user.username) %> <%= link_to event.user.username,  artist_path(event.user.username) %> at <%= event.created_at.to_s(:db) %></small>
     </blockquote>
     </p>
     <% if user_signed_in? && current_user.id == event.user.id %>

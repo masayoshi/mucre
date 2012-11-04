@@ -1,12 +1,26 @@
+# -*- coding: utf-8 -*-
 class EventsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.refine_search(params).paginate(page: params[:page])
-    @tags = Event.refine_search(params).tag_counts
-    @json = Event.refine_search(params).all.to_gmaps4rails
+    if params[:username].present?
+      @artist = User.confirmed.find_by_username(params[:username])
+
+      if @artist.present?
+        @events = @artist.events.refine_search(params).paginate(page: params[:page])
+        @tags = @artist.events.refine_search(params).tag_counts
+        @json = @artist.events.refine_search(params).all.to_gmaps4rails
+      else
+        redirect_to events_path, alert: "ご指定のアーティストは見つかりませんでした"
+        return
+      end
+    else
+      @events = Event.refine_search(params).paginate(page: params[:page])
+      @tags = Event.refine_search(params).tag_counts
+      @json = Event.refine_search(params).all.to_gmaps4rails
+    end
 
     respond_to do |format|
       format.html # index.html.erb

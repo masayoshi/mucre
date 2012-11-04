@@ -1,0 +1,28 @@
+<div class="row-fluid">
+  <div class="span1">
+    <%= link_to image_tag(artist.image_url, class: "img-rounded img-polaroid"), artist_path(artist.username) %>
+  </div>
+  <div class="span11">
+    <% if artist.name.present? %>
+      <h4><%= link_to artist.name, artist_path(artist.username) %> <small><%= artist.username %></small></h4>
+    <% else %>
+      <h4><%= link_to artist.username, artist_path(artist.username) %></h4>
+    <% end %>
+    <p>
+    <% if artist.tag_list.present? %>
+      <i class="icon-tags"></i>
+      <% artist.tags.each do |tag| %>
+        <% if params[:tags].present? && params[:tags].split("+").include?(tag.name) %>
+          <span class="label label-info"><%= tag.name.html_safe %></span>
+        <% else %>
+          <%= link_to tag.name.html_safe, tagged_artists_path(tag.name), class: "label" %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <blockquote>
+      <p><%= truncate Sanitize.clean(artist.biography, Sanitize::Config::RESTRICTED), length: 80 %></p>
+    </blockquote>
+    </p>
+  </div>
+</div>
+<div class="page-header"></div>

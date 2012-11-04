@@ -1,0 +1,65 @@
+<div class="page-header">
+  <% if @artist.name.present? %>
+    <h1><%= image_tag @artist.image_url, class: "img-rounded img-polaroid" %> <%= @artist.name %> <small><%= @artist.username %></small></h1>
+  <% else %>
+    <h1><%= image_tag @artist.image_url, class: "img-rounded img-polaroid" %> <%= @artist.username %></h1>
+  <% end %>
+  <h3>
+    <% if @artist_twitter.present? %>
+      <%= link_to "<i class='icon-twitter-sign icon-large'></i>".html_safe, twitter_account_url(@artist_twitter.uid), target: "_blank" %>
+    <% end %>
+    <% if @artist_facebook.present? %>
+      <%= link_to "<i class='icon-facebook-sign icon-large'></i>".html_safe, facebook_account_url(@artist_facebook.uid), target: "_blank" %>
+    <% end %>
+  </h3>
+  <% if @artist.url.present? %>
+    <h4><i class='icon-globe'></i> <%= link_to "#{@artist.url} <i class='icon-external-link'></i>".html_safe , @artist.url, target: "_blank"%></h4>
+  <% end %>
+  <% if @artist.tag_list.present? %>
+    <h4>
+      <i class="icon-tags"></i>
+      <% @artist.tags.each do |tag| %>
+        <%= link_to tag.name.html_safe, tagged_artists_path(tag.name), class: "label" %>
+      <% end %>
+    </h4>
+  <% end %>
+</div>
+<div class="row">
+  <div class="span8">
+    <div class="page-header">
+      <h4><i class="icon-info-sign"></i> Biography <small>略歴</small></h4>
+    </div>
+    <p>
+    <%= Sanitize.clean(@artist.biography, Sanitize::Config::CUSTOM).html_safe if @artist.biography.present? %>
+    </p>
+  </div>
+  <div class="span4 sidebar">
+    <div class="well">
+      <h4><i class="icon-calendar"></i> イベント情報</h4>
+    <% if @events.present? %>
+      <% @events.each do |event| %>
+        <h5><%= link_to event.title, event_path(event) %></h5>
+        <p>
+        <h5><i class="icon-calendar"></i> <small>開催日時</small>
+          <%= event.start_date + " " + event.start_time %> <small><i class="icon-caret-right"></i></small> <%= event.end_date + " " + event.end_time %>
+        </h5>
+        <% if event.tag_list.present? %>
+          <i class="icon-tags"></i>
+          <% event.tags.each do |tag| %>
+            <span class="label"><%= tag.name.html_safe %></span>
+          <% end %>
+        <% end %>
+        <blockquote>
+          <p><%= truncate Sanitize.clean(event.description, Sanitize::Config::RESTRICTED), length: 80 %></p>
+          <small>Posted at <%= event.created_at.to_s(:db) %></small>
+        </blockquote>
+        </p>
+        <div class="page-header"></div>
+      <% end %>
+      <p><%= link_to "#{@artist.username} のイベントをもっと見る", events_path(username: @artist.username) %></p>
+    <% else %>
+      <p>登録されているイベントはありません</p>
+    <% end %>
+    </div>
+  </div>
+</div>

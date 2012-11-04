@@ -1,0 +1,15 @@
+<div class="well">
+  <h4><i class="icon-filter"></i> 表示条件</h4>
+  <p>
+  <% if params[:sort] %>
+    <span class="label"><%= readable_artist_sort_condition(params[:sort]) %> <%= link_to "x", remove_sort_artists_path, class: "label-close" %></span>
+  <% else %>
+    <span class="label"><%= readable_artist_sort_condition(params[:sort]) %></span>
+  <% end %>
+  <% if params[:tags] %>
+    <% params[:tags].split("+").each do |tag| %>
+      <span class="label label-info"><%= tag.html_safe %> <%= link_to "x", remove_tag_artists_path(tag), class: "label-close" %></span>
+    <% end %>
+  <% end %>
+  </p>
+</div>

@@ -26,10 +26,9 @@ def make_users
 end
 
 def make_events
-  users = User.where(id: 1..5)
-  users.each do |user|
+  User.all.each do |user|
     10.times do
-      start_datetime = Time.at(rand * Time.now.to_i)
+      start_datetime = Time.now + rand(1000).hours
       end_datetime = start_datetime + 3.hours
       user.events.create(title: Faker::Lorem.sentence(5),
                          description: Faker::Lorem.sentence(10),

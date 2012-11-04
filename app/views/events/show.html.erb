@@ -25,18 +25,18 @@
     </p>
   </div>
   <div class="span4 sidebar">
-    <% if @event.user_id == current_user.id %>
+    <% if user_signed_in? && @event.user_id == current_user.id %>
       <%= link_to "<i class='icon-edit'></i> 編集".html_safe, edit_event_path(@event), class: "btn" %>
       <%= link_to "<i class='icon-trash'></i> 削除".html_safe ,event_path(@event), confirm: '本当に削除しますか？', method: :delete, class: "btn btn-danger" %>
     <% end %>
     <h4><i class="icon-user"></i> アーティスト情報</h4>
     <div class="row">
       <div class="span1">
-        <%= link_to image_tag(@event.user.image_url, class: "img-rounded img-polaroid"), "" %>
+        <%= link_to image_tag(@event.user.image_url, class: "img-rounded img-polaroid"), artist_path(@event.user.username) %>
       </div>
       <div class="span3">
         <%= @event.user.name %></br>
-        <b><%= link_to @event.user.username, "" %></b></br>
+        <b><%= link_to @event.user.username, artist_path(@event.user.username) %></b></br>
         <% if @event.user.tag_list.present? %>
           <i class="icon-tags"></i>
           <% @event.tags.each do |tag| %>

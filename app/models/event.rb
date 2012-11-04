@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
     when "rd"
       order "created_at DESC"
     else
-      order "start_datetime DESC"
+      order "start_datetime ASC"
     end
   }
 

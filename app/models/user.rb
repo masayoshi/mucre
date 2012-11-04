@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, length: { within: 3..50 }, uniqueness: true, format: { with: /\A[_a-zA-Z0-9]+\Z/ } # only A..Za..z0..9-_
   validates :name, length: { within: 3..100 }, allow_blank: true
-  validates :biography, length: { maximum: 1000 }
+  validates :biography, length: { maximum: 2000 }
   validates :url, format: {with: URI::regexp(%w(http https))}, allow_blank: true
   validates_confirmation_of :password
 
@@ -46,6 +46,31 @@ class User < ActiveRecord::Base
 
   has_many :authentications, dependent: :destroy
   has_many :events, dependent: :destroy
+
+  scope :confirmed, where("confirmed_at IS NOT NULL")
+
+  scope :sort_condition, lambda { |sort|
+    case sort
+    when "ld"
+      order "current_sign_in_at DESC"
+    else
+      order "confirmed_at DESC"
+    end
+  }
+
+  scope :tags_search, lambda { |tags|
+    composed_scope = self.scoped
+    if tags.present?
+      tags.split("+").each do |tag|
+        composed_scope = composed_scope.tagged_with(tag)
+      end
+    end
+    return composed_scope
+  }
+
+  scope :refine_search, lambda { |params|
+    confirmed.tags_search(params[:tags]).sort_condition(params[:sort])
+  }
 
   def self.find_for_twitter_oauth(auth, current_user = nil)
     authentication = Authentication.find_by_provider_and_uid("twitter", auth.uid.to_s)

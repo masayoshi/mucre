@@ -1,6 +1,6 @@
 <div class="well">
-  <%= image_tag current_user.image_url %>
-  <b><%= current_user.username %></b>
+  <%= link_to image_tag(current_user.image_url, class: "img-rounded img-polaroid"), artist_path(current_user.username) %>
+  <b><%= link_to current_user.username, artist_path(current_user.username) %></b>
 </div>
 <div class="well">
   <ul class="nav nav-list">

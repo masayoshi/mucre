@@ -34,6 +34,7 @@
     </p>
   </div>
   <div class="span4 sidebar">
+    <%= render 'shared/social_buttons', url: request.url, title: @artist.username %>
     <div class="well">
       <h4><i class="icon-calendar"></i> イベント情報</h4>
     <% if @events.present? %>

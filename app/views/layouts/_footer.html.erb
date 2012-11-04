@@ -1,6 +1,8 @@
 <hr>
 <footer class="footer">
 <div class="container">
+  <div class="row">
+    <div class="span10">
   <ul class="footer-links">
     <li><%= link_to "About", about_path %></li>
     <li class="muted">·</li>
@@ -9,6 +11,11 @@
     <li><%= link_to "Help", help_path %></li>
   </ul>
   <p>&copy; MuseumCreated.com 2012</p>
+</div>
+<div class="span2">
+  <%= render 'shared/social_buttons', url: "http://mucre.herokuapp.com", title: "MuseumCreated.com" %>
+</div>
+</div>
 </div>
 </footer>
 <%= yield :scripts %>

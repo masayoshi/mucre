@@ -19,8 +19,16 @@ Mucre::Application.routes.draw do
   root to: 'static_pages#home'
 end
 #== Route Map
-# Generated on 27 Oct 2012 15:14
+# Generated on 03 Nov 2012 23:11
 #
+#                          POST   /events(.:format)                      events#create
+#                new_event GET    /events/new(.:format)                  events#new
+#               edit_event GET    /events/:id/edit(.:format)             events#edit
+#                    event GET    /events/:id(.:format)                  events#show
+#                          PUT    /events/:id(.:format)                  events#update
+#                          DELETE /events/:id(.:format)                  events#destroy
+#         settings_account        /settings/account(.:format)            devise/registrations#edit
+#         new_user_session GET    /users/sign_in(.:format)               devise/sessions#new
 #             user_session POST   /users/sign_in(.:format)               devise/sessions#create
 #     destroy_user_session DELETE /users/sign_out(.:format)              devise/sessions#destroy
 #  user_omniauth_authorize        /users/auth/:provider(.:format)        omniauth_callbacks#passthru {:provider=>/twitter|facebook/}
@@ -38,7 +46,12 @@ end
 #        user_confirmation POST   /users/confirmation(.:format)          devise/confirmations#create
 #    new_user_confirmation GET    /users/confirmation/new(.:format)      devise/confirmations#new
 #                          GET    /users/confirmation(.:format)          devise/confirmations#show
-#                    about        /about(.:format)                       static_pages#about
-#                   policy        /policy(.:format)                      static_pages#policy
-#                     help        /help(.:format)                        static_pages#help
+#                  artists GET    /artists(.:format)                     artists#index
+#                   artist GET    /artists/:username(.:format)           artists#show
+#         settings_profile GET    /settings/profile(.:format)            settings#profile
+#        settings_services GET    /settings/services(.:format)           settings#services
+#          settings_update PUT    /settings/update(.:format)             settings#update
+#                    about GET    /about(.:format)                       static_pages#about
+#                   policy GET    /policy(.:format)                      static_pages#policy
+#                     help GET    /help(.:format)                        static_pages#help
 #                     root        /                                      static_pages#home

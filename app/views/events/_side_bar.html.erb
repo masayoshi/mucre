@@ -1,6 +1,5 @@
 <div class="well">
-  <%= link_to 'New Event', new_event_path if current_user.present? %>
-  <div class="btn-toolbar">
+  <h4><i class="icon-sort"></i> 表示順を変える</h4>
   <div class="btn-group">
     <button class="btn btn-small">表示順</button>
     <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
@@ -8,30 +7,46 @@
     </button>
     <ul class="dropdown-menu">
       <!-- dropdown menu links -->
-      <li><%= link_to "登録日時が新しい順", "" %></li>
-      <li><%= link_to "再生数が多い順", ""  %></li>
-      <li><%= link_to "マイリスト数が少ない順", "" %></li>
+      <li><%= link_to "開催日時順", remove_sort_events_path %></li>
+      <li><%= link_to "登録日時が新しい順", sort_events_path("rd") %></li>
     </ul>
   </div>
-  <div class="btn-group">
-    <button class="btn btn-small">投稿日時</button>
-    <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <!-- dropdown menu links -->
-      <li><%= link_to "24時間以内", "" %></li>
-      <li><%= link_to "24時間以内", "" %></li>
-      <li><%= link_to "24時間以内", "" %></li>
-    </ul>
-  </div>
-</div>
   <hr />
+  <h4><i class="icon-search"></i> 条件で絞り込む</h4>
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <button class="btn btn-small">開催日時</button>
+      <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <!-- dropdown menu links -->
+        <li><%= link_to "これから開催されるイベント", remove_range_events_path %></li>
+        <li><%= link_to "１週間以内に開催", range_scoped_events_path("week") %></li>
+        <li><%= link_to "１ヶ月以内に開催", range_scoped_events_path("month") %></li>
+        <li><%= link_to "開催済みを含む全てのイベント", range_scoped_events_path("all") %></li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-small">料金</button>
+      <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <!-- dropdown menu links -->
+        <li><%= link_to "全て", remove_fee_filter_events_path %></li>
+        <li><%= link_to "無料", fee_filter_events_path("free") %></li>
+        <li><%= link_to "有料", fee_filter_events_path("pay") %></li>
+      </ul>
+    </div>
+  </div>
+  <hr />
+  <h4><i class="icon-tags"></i> タグで絞り込む</h4>
   <% tag_cloud(@tags, ["label", "label label-success", "label label-warning", "label label-important"]) do |tag, css_class| %>
     <% if params[:tags].present? && params[:tags].split("+").include?(tag.name) %>
       <span class="label label-info"><%= tag.name.html_safe %></span>
     <% else %>
-      <%= link_to tag.name.html_safe, "", class: css_class %>
+      <%= link_to tag.name.html_safe, additional_tag_events_path(tag.name), class: css_class %>
     <% end %>
   <% end %>
 </div>

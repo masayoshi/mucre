@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span8">
+  <div class="span9">
     <div class="page-header">
       <h2>Listing events<small> アーティストのイベント一覧</small></h2>
     </div>
@@ -7,14 +7,14 @@
       <div align="center">
         <%= gmaps4rails(@json) %>
       </div>
-      <%= will_paginate @events %>
       <%= render @events %>
       <%= will_paginate @events %>
     <% else %>
       <p>該当するイベントは存在しません</p>
     <% end %>
   </div>
-  <div class="span4">
+  <div class="span3">
+    <%= render "search_conditions" %>
     <%= render "side_bar" %>
   </div>
 </div>

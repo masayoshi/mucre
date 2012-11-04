@@ -17,6 +17,50 @@ class Event < ActiveRecord::Base
   acts_as_taggable
   acts_as_gmappable process_geocoding: false
 
+  scope :fee_filter, lambda { |condition|
+    case condition
+    when "free"
+      where "fee = ?", 0
+    when "pay"
+      where "fee > ?", 0
+    end
+  }
+
+  scope :sort_condition, lambda { |sort|
+    case sort
+    when "rd"
+      order "created_at DESC"
+    else
+      order "start_datetime DESC"
+    end
+  }
+
+  scope :tags_search, lambda { |tags|
+    composed_scope = self.scoped
+    if tags.present?
+      tags.split("+").each do |tag|
+        composed_scope = composed_scope.tagged_with(tag)
+      end
+    end
+    return composed_scope
+  }
+
+  scope :date_range, lambda { |range|
+    case range
+    when "week"
+      where "start_datetime > ? and start_datetime < ?", Time.now, Time.now + 1.week
+    when "month"
+      where "start_datetime > ? and start_datetime < ?", Time.now, Time.now + 1.month
+    when "all"
+    else
+      where "start_datetime > ?", Time.now
+    end
+  }
+
+  scope :refine_search, lambda { |params|
+    date_range(params[:range]).fee_filter(params[:fee]).tags_search(params[:tags]).sort_condition(params[:sort])
+  }
+
   def get_datetimes
     self.start_datetime ||= Time.now  # if the start_datetime is not set, set it to now
     self.end_datetime ||= Time.now  # if the end_datetime is not set, set it to now

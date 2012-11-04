@@ -4,9 +4,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.paginate(page: params[:page])
-    @tags = Event.tag_counts
-    @json = Event.all.to_gmaps4rails
+    @events = Event.refine_search(params).paginate(page: params[:page])
+    @tags = Event.refine_search(params).tag_counts
+    @json = Event.refine_search(params).all.to_gmaps4rails
 
     respond_to do |format|
       format.html # index.html.erb

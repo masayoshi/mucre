@@ -1,0 +1,25 @@
+<div class="well">
+  <h4><i class="icon-filter"></i> 表示条件</h4>
+  <p>
+  <% if params[:sort] %>
+    <span class="label"><%= readable_sort_condition(params[:sort]) %> <%= link_to "x", remove_sort_events_path, class: "label-close" %></span>
+  <% else %>
+    <span class="label"><%= readable_sort_condition(params[:sort]) %></span>
+  <% end %>
+  <% if params[:range] %>
+    <span class="label"><%= readable_range_condition(params[:range]) %> <%= link_to "x", remove_range_events_path, class: "label-close" %></span>
+  <% else %>
+    <span class="label"><%= readable_range_condition(params[:range]) %></span>
+  <% end %>
+  <% if params[:fee] %>
+    <span class="label"><%= readable_fee_filter_condition(params[:fee]) %> <%= link_to "x", remove_fee_filter_events_path, class: "label-close" %></span>
+  <% else %>
+    <span class="label"><%= readable_fee_filter_condition(params[:fee]) %></span>
+  <% end %>
+  <% if params[:tags] %>
+    <% params[:tags].split("+").each do |tag| %>
+      <span class="label label-info"><%= tag.html_safe %> <%= link_to "x", remove_tag_events_path(tag), class: "label-close" %></span>
+    <% end %>
+  <% end %>
+  </p>
+</div>

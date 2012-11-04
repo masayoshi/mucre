@@ -7,18 +7,22 @@
     <% if event.tag_list.present? %>
       <i class="icon-tags"></i>
       <% event.tags.each do |tag| %>
-        <span class="label"><%= tag.name.html_safe %></span>
+        <% if params[:tags].present? && params[:tags].split("+").include?(tag.name) %>
+          <span class="label label-info"><%= tag.name.html_safe %></span>
+        <% else %>
+          <%= link_to tag.name.html_safe, tagged_events_path(tag.name), class: "label" %>
+        <% end %>
       <% end %>
     <% end %>
     <blockquote>
       <p><%= truncate event.description, length: 80 %></p>
       <small>Posted by <%= link_to image_tag(event.user.image_url, class: "small_avator img-rounded"), "" %> <%= link_to event.user.username, ""%> at <%= event.created_at.to_s(:db) %>
-</small>
-    </blockquote>
-    </p>
-    <% if user_signed_in? && current_user.id == event.user.id %>
-      <%= link_to "編集", edit_event_path(event) %> | <%= link_to "削除" ,event_path(event), confirm: '本当に削除しますか？', method: :delete %>
-    <% end %>
-    <div class="page-header"></div>
-  </div>
+    </small>
+  </blockquote>
+  </p>
+  <% if user_signed_in? && current_user.id == event.user.id %>
+    <%= link_to "編集", edit_event_path(event) %> | <%= link_to "削除" ,event_path(event), confirm: '本当に削除しますか？', method: :delete %>
+  <% end %>
+  <div class="page-header"></div>
+</div>
 </div>

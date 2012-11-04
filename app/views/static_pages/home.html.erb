@@ -1,2 +1,24 @@
-<h1>MuseumCreated.com</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="row">
+  <div class="span6">
+    <h1>MuseumCreated.com<small>は</small></h1>
+    <h2>アートイベント情報サイト<small>です</small></h2>
+    <p class="lead">
+    ユーザの方はカレンダーのアイコンからアートイベントを見つけてください。<br />
+    アーティストの方はアーティスト登録してイベントをプロモーションしてください。
+    </p>
+    <p>
+    <%= link_to "アーティスト登録する(無料)", new_user_registration_path, class: "btn btn-primary btn-large"%>
+    </p>
+    <p>すでにアカウントをお持ちの方はこちらから<%= link_to "<i class='icon-signin icon-large'></i> Sign in".html_safe, new_user_session_path %></p>
+  </div>
+  <div class="span6">
+    <div class="well" align="center">
+      <h2>アートイベントを探す</h2>
+      <p>
+      <div style="font-size: 250px;line-height: 1;  text-shadow: 2px 2px 2px #333333;">
+        <%= link_to "<i class='icon-calendar'></i>".html_safe, events_path %>
+      </div>
+      </p>
+    </div>
+  </div>
+</div>

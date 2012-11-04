@@ -61,3 +61,14 @@ body {
   opacity: 0.4;
   filter: alpha(opacity=20);
 }
+
+.footer-links {
+  margin: 10px 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
+}

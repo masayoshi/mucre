@@ -39,7 +39,7 @@
         <b><%= link_to @event.user.username, artist_path(@event.user.username) %></b></br>
         <% if @event.user.tag_list.present? %>
           <i class="icon-tags"></i>
-          <% @event.tags.each do |tag| %>
+          <% @event.user.tags.each do |tag| %>
             <span class="label"><%= tag.name.html_safe %></span>
           <% end %>
         <% end %>

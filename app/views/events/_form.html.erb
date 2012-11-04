@@ -88,3 +88,11 @@
     <%= f.submit "登録", class: "btn btn-primary" %>
   </div>
 <% end %>
+<script type="text/javascript">
+  $(function() {
+      return $('#event_tag_list').select2({
+        tags: <%= Event.tag_counts.map(&:name).to_json.html_safe %>,
+        tokenSeparators: [",", " ", "+"]
+      });
+    });
+</script>

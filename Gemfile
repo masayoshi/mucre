@@ -17,6 +17,7 @@ gem 'gmaps4rails'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'sanitize'
+gem 'faker'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -37,7 +38,6 @@ group :development do
   gem 'guard-livereload'
   gem 'annotate', ">=2.5.0"
   gem 'pry-rails'
-  gem 'faker'
 end
 
 group :test do

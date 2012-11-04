@@ -16,13 +16,13 @@
     <% end %>
     <blockquote>
       <p><%= truncate event.description, length: 80 %></p>
-      <small>Posted by <%= link_to image_tag(event.user.image_url, class: "small_avator img-rounded"), "" %> <%= link_to event.user.username, ""%> at <%= event.created_at.to_s(:db) %>
-    </small>
-  </blockquote>
-  </p>
-  <% if user_signed_in? && current_user.id == event.user.id %>
-    <%= link_to "編集", edit_event_path(event) %> | <%= link_to "削除" ,event_path(event), confirm: '本当に削除しますか？', method: :delete %>
-  <% end %>
-  <div class="page-header"></div>
-</div>
+      <small>Posted by <%= link_to image_tag(event.user.image_url, class: "small_avator img-rounded"), "" %> <%= link_to event.user.username, ""%> at <%= event.created_at.to_s(:db) %></small>
+    </blockquote>
+    </p>
+    <% if user_signed_in? && current_user.id == event.user.id %>
+      <%= link_to "<i class='icon-edit'></i> 編集".html_safe, edit_event_path(event), class: "btn btn-mini" %>
+      <%= link_to "<i class='icon-trash'></i> 削除".html_safe ,event_path(event), confirm: '本当に削除しますか？', method: :delete, class: "btn btn-mini btn-danger" %>
+    <% end %>
+    <div class="page-header"></div>
+  </div>
 </div>

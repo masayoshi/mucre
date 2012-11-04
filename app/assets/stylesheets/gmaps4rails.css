@@ -15,6 +15,11 @@
   height: 400px;
 }
 
+.sidebar .gmaps4rails_map {
+  width: Auto;
+  height: 200px;
+}
+
 .bing_map {
    position: absolute;
    top: 20;

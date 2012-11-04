@@ -1,64 +1,66 @@
-<p>
-  <b>Title:</b>
-  <%= @event.title %>
-</p>
-
-<p>
-  <b>Place:</b>
-  <%= @event.place %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @event.address %>
-</p>
-
-<p>
-  <b>Latitude:</b>
-  <%= @event.latitude %>
-</p>
-
-<p>
-  <b>Longitude:</b>
-  <%= @event.longitude %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @event.description %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%= @event.url %>
-</p>
-
-<p>
-  <b>Fee:</b>
-  <%= @event.fee %> Yen
-</p>
-
-<p>
-  <b>Start datetime:</b>
-  <%= @event.start_datetime %>
-</p>
-
-<p>
-  <b>End datetime:</b>
-  <%= @event.end_datetime %>
-</p>
-
-<p>
-  <b>Tags:</b>
-  <%= @event.tag_list %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @event.user.username %>
-</p>
-
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
-<br />
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<div class="row">
+  <div class="span8">
+    <div class="page-header">
+      <h1><%= @event.title%></h1>
+      <h2><i class="icon-calendar"></i> <small>開催日時</small>
+        <%= @event.start_date + " " + @event.start_time %> <small><i class="icon-caret-right"></i></small> <%= @event.end_date + " " + @event.end_time %>
+      </h2>
+      <% if @event.url.present? %>
+        <h4><i class='icon-globe'></i> <%= link_to "#{@event.url} <i class='icon-external-link'></i>".html_safe , @event.url, target: "_blank"%></h4>
+      <% end %>
+      <% if @event.tag_list.present? %>
+        <h4>
+          <i class="icon-tags"></i>
+          <% @event.tags.each do |tag| %>
+            <%= link_to tag.name.html_safe, tagged_events_path(tag.name), class: "label" %>
+          <% end %>
+        </h4>
+      <% end %>
+    </div>
+    <div class="page-header">
+      <h4><i class="icon-info-sign"></i> イベント詳細</h4>
+    </div>
+    <p>
+    <%= @event.description %>
+    </p>
+  </div>
+  <div class="span4 sidebar">
+    <% if @event.user_id == current_user.id %>
+      <%= link_to "<i class='icon-edit'></i> 編集".html_safe, edit_event_path(@event), class: "btn" %>
+      <%= link_to "<i class='icon-trash'></i> 削除".html_safe ,event_path(@event), confirm: '本当に削除しますか？', method: :delete, class: "btn btn-danger" %>
+    <% end %>
+    <h4><i class="icon-user"></i> アーティスト情報</h4>
+    <div class="row">
+      <div class="span1">
+        <%= link_to image_tag(@event.user.image_url, class: "img-rounded img-polaroid"), "" %>
+      </div>
+      <div class="span3">
+        <%= @event.user.name %></br>
+        <b><%= link_to @event.user.username, "" %></b></br>
+        <% if @event.user.tag_list.present? %>
+          <i class="icon-tags"></i>
+          <% @event.tags.each do |tag| %>
+            <span class="label"><%= tag.name.html_safe %></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <hr />
+    <div class="well">
+      <h4><i class="icon-map-marker"></i> 会場情報</h4>
+      <dl>
+        <dt>会場</dt>
+        <dd><%= @event.place %></dd>
+        <dt>住所</dt>
+        <dd><%= @event.address %></dd>
+      </dl>
+      <%= gmaps4rails(@json) %>
+    </div>
+    <div class="well">
+      <h4><i class="icon-money"></i> 料金</h4>
+      <p>
+      <%= @event.fee %>円
+      </p>
+    </div>
+  </div>
+</div>

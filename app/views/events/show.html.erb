@@ -21,7 +21,7 @@
       <h4><i class="icon-info-sign"></i> イベント詳細</h4>
     </div>
     <p>
-    <%= @event.description %>
+    <%= Sanitize.clean(@event.description, Sanitize::Config::CUSTOM).html_safe %>
     </p>
   </div>
   <div class="span4 sidebar">

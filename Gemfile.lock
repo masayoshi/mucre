@@ -197,6 +197,8 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -264,6 +266,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rb-fsevent
   rspec-rails
+  sanitize
   sass-rails (~> 3.2.3)
   select2-rails
   spork

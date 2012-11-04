@@ -15,7 +15,7 @@
       <% end %>
     <% end %>
     <blockquote>
-      <p><%= truncate event.description, length: 80 %></p>
+      <p><%= truncate Sanitize.clean(event.description, Sanitize::Config::RESTRICTED), length: 80 %></p>
       <small>Posted by <%= link_to image_tag(event.user.image_url, class: "small_avator img-rounded"), "" %> <%= link_to event.user.username, ""%> at <%= event.created_at.to_s(:db) %></small>
     </blockquote>
     </p>

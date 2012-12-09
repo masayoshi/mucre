@@ -63,6 +63,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        current_user.twitter.update(@event.title[0..80] + " ... " + url_for(controller: "events",action: "show", id: @event)) if params[:twitter] == 'yes'
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else
@@ -79,6 +80,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
+        current_user.twitter.update(@event.title[0..80] + " ... " + url_for(controller: "events",action: "show", id: @event)) if params[:twitter] == 'yes'
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else

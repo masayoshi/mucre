@@ -18,6 +18,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'sanitize'
 gem 'faker'
+gem 'twitter'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

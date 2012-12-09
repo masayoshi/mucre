@@ -148,6 +148,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  # return Twitter client
+  def twitter
+    unless @twitter_user
+      authentication = self.authentications.find_by_provider('twitter')
+      @twitter_user = Twitter::Client.new(
+        oauth_token: authentication.token,
+        oauth_token_secret: authentication.secret
+      ) rescue nil
+    end
+    @twitter_user
+  end
+
   private
 
   def fill_image_url

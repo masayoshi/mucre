@@ -38,6 +38,7 @@ group :development do
   gem 'guard-livereload'
   gem 'annotate', ">=2.5.0"
   gem 'pry-rails'
+  gem 'taps'
 end
 
 group :test do

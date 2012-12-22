@@ -84,14 +84,24 @@
       <p class="help-block">イベントに関係するキーワードを入力してください</p>
     </div>
   </div>
-  <% if current_user.authentications.find_by_provider('twitter').present? %>
-    <div class="control-group">
-      <label class="control-label">みんなに宣伝</label>
-      <div class="controls">
+  <div class="control-group">
+    <label class="control-label">みんなに宣伝</label>
+    <div class="controls">
+      <% if current_user.authentications.find_by_provider('twitter').present? %>
         <%= check_box_tag "twitter", "yes", true %> Twitterでつぶやく <i class="icon-twitter-sign icon-large"></i>
-      </div>
+      <% else %>
+        <%= link_to "Twitterと連携するとイベント情報をつぶやけます <i class='icon-twitter icon-large'></i>".html_safe,
+          omniauth_authorize_path(current_user, "twitter") if @authentication_twitter.blank? %>
+      <% end %>
+      <br />
+      <% if current_user.authentications.find_by_provider('facebook').present? %>
+        <%= check_box_tag "facebook", "yes", true %> Facebookに投稿する <i class="icon-facebook-sign icon-large"></i>
+      <% else %>
+        <%= link_to "Facebookと連携するとイベント情報を投稿できます <i class='icon-facebook icon-large'></i>".html_safe,
+          omniauth_authorize_path(current_user, "facebook") if @authentication_facebook.blank? %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
   <div class="form-actions">
     <%= f.submit "登録", class: "btn btn-primary" %>
   </div>

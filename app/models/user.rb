@@ -160,6 +160,15 @@ class User < ActiveRecord::Base
     @twitter_user
   end
 
+  # return Twitter client
+  def facebook
+    unless @facebook_user
+      authentication = self.authentications.find_by_provider('facebook')
+      @facebook_user = FbGraph::User.me(authentication.token) rescue nil
+    end
+    @facebook_user
+  end
+
   private
 
   def fill_image_url

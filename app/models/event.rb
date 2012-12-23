@@ -30,6 +30,9 @@ class Event < ActiveRecord::Base
   validates :title, :place, :address, :fee, :description, :latitude, :longitude, :start_datetime, :end_datetime, :user_id,  presence: true
   validates_format_of :start_time, :end_time, with: /\d{1,2}:\d{2}/
 
+  validates_attachment_size :image, less_than: 3.megabytes
+  validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/png']
+
   after_initialize :get_datetimes
   before_validation :set_datetimes
 

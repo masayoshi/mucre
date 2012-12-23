@@ -69,6 +69,13 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :image, "イベント画像", class: "control-label" %>
+    <div class="controls">
+      <%= f.file_field :image , class: "input-xxlarge" %>
+      <p class="help-block">イベントのフライヤーやイメージ画像をアップロードしてください。</p>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :fee, "料金", class: "control-label" %>
     <div class="controls">
       <div class="input-append">

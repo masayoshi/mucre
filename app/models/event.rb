@@ -20,7 +20,7 @@
 
 class Event < ActiveRecord::Base
   attr_accessible :address, :description, :end_datetime, :fee, :latitude, :longitude, :place, :start_datetime, :title, :url, :user_id
-  attr_accessible :tag_list
+  attr_accessible :tag_list, :image
 
   attr_accessor :start_date, :start_time, :end_date, :end_time
   attr_accessible :start_date, :start_time, :end_date, :end_time
@@ -36,6 +36,8 @@ class Event < ActiveRecord::Base
   before_validation :geocode, if: :address_changed?
   acts_as_taggable
   acts_as_gmappable process_geocoding: false
+
+  has_attached_file :image #, styles: { medium: '360x280>'}
 
   scope :fee_filter, lambda { |condition|
     case condition

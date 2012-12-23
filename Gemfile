@@ -20,6 +20,8 @@ gem 'sanitize'
 gem 'faker'
 gem 'twitter'
 gem 'fb_graph'
+gem 'paperclip'
+gem 'aws-sdk'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

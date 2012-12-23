@@ -29,6 +29,14 @@
       <%= link_to "<i class='icon-edit'></i> 編集".html_safe, edit_event_path(@event), class: "btn" %>
       <%= link_to "<i class='icon-trash'></i> 削除".html_safe ,event_path(@event), confirm: '本当に削除しますか？', method: :delete, class: "btn btn-danger" %>
     <% end %>
+    <% if @event.image.present? %>
+      <h4><i class="icon-camera"></i> イベント画像</h4>
+      <div class="row">
+        <div class="span4">
+          <%= image_tag @event.image.url, width: "360" %>
+        </div>
+      </div>
+    <% end %>
     <h4><i class="icon-user"></i> アーティスト情報</h4>
     <div class="row">
       <div class="span1">

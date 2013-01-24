@@ -72,6 +72,8 @@ class User < ActiveRecord::Base
     confirmed.tags_search(params[:tags]).sort_condition(params[:sort])
   }
 
+  self.per_page = 20
+
   def self.find_for_twitter_oauth(auth, current_user = nil)
     authentication = Authentication.find_by_provider_and_uid("twitter", auth.uid.to_s)
     dummy_email = "dummy-#{auth['uid']}@mucre.com" # twitter return no email, so set dummy email address because of email wanne be unique.

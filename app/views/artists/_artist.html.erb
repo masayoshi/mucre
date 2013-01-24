@@ -1,8 +1,8 @@
-<div class="row-fluid">
+<%= cycle('<div class="row-fluid">'.html_safe, '', name: 'div-fluid-start') %>
   <div class="span1">
     <%= link_to image_tag(artist.image_url, class: "img-rounded img-polaroid"), artist_path(artist.username) %>
   </div>
-  <div class="span11">
+  <div class="span5">
     <% if artist.name.present? %>
       <h4><%= link_to artist.name, artist_path(artist.username) %> <small><%= artist.username %></small></h4>
     <% else %>
@@ -19,10 +19,7 @@
         <% end %>
       <% end %>
     <% end %>
-    <blockquote>
-      <p><%= truncate Sanitize.clean(artist.biography, Sanitize::Config::RESTRICTED), length: 80 %></p>
-    </blockquote>
     </p>
   </div>
-</div>
-<div class="page-header"></div>
+  <%= cycle('', '</div>'.html_safe , name: 'div-fluid-end')%>
+<%= cycle('', '<div class="page-header"></div>'.html_safe, name: 'separater')%>

@@ -40,6 +40,8 @@ class Event < ActiveRecord::Base
   acts_as_taggable
   acts_as_gmappable process_geocoding: false
 
+  self.per_page = 20
+
   has_attached_file :image #, styles: { medium: '360x280#'}
 
   scope :fee_filter, lambda { |condition|

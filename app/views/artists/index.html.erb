@@ -7,13 +7,17 @@
       <% @artists.each do |artist| %>
         <%= render "artist", artist: artist %>
       <% end %>
-      <%= will_paginate @artists %>
-    <% else %>
-      <p>該当するアーティストは存在しません</p>
+      <% if @artists.count%2 != 0 %>
+        <%= cycle('', '</div>'.html_safe , name: 'div-fluid-end')%>
+      <%= cycle('', '<div class="page-header"></div>'.html_safe, name: 'separater')%>
     <% end %>
-  </div>
-  <div class="span3">
-    <%= render "search_conditions" %>
-    <%= render "side_bar" %>
-  </div>
+    <%= will_paginate @artists %>
+  <% else %>
+    <p>該当するアーティストは存在しません</p>
+  <% end %>
+</div>
+<div class="span3">
+  <%= render "search_conditions" %>
+  <%= render "side_bar" %>
+</div>
 </div>

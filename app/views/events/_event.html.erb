@@ -5,6 +5,9 @@
     <h4><i class="icon-calendar"></i> <small>開催日時</small>
       <%= event.start_date + " " + event.start_time %> <small><i class="icon-caret-right"></i></small> <%= event.end_date + " " + event.end_time %>
     </h4>
+    <% if event.image.present? %>
+      <%= link_to image_tag(event.image.url, class: "img-flyer"), event_path(event) %>
+    <% end %>
     <% if event.tag_list.present? %>
       <i class="icon-tags"></i>
       <% event.tags.each do |tag| %>

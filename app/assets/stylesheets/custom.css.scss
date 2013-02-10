@@ -74,3 +74,14 @@ body {
 .footer-links li:first-child {
   padding-left: 0;
 }
+
+.img-flyer {
+  border:0.07142857rem solid #EDEDED;
+  box-shadow:gray 0.3rem 0.3rem 0.2rem;
+  margin:0 0.5rem 0.5rem 0;
+  clear:both;
+  float:left;
+  height:auto;
+  max-height:119px;
+  width:84px;
+}

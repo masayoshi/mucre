@@ -22,14 +22,12 @@
         </ul>
         </li>
       <% else %>
+        <li<%= " class='active'".html_safe if current_page?(new_user_registration_path) %>><%= link_to "<i class='icon-user icon-large'></i> アーティスト登録".html_safe, new_user_registration_path %></li>
         <li<%= " class='active'".html_safe if current_page?(new_user_session_path) %>><%= link_to "<i class='icon-signin icon-large'></i> Sign in".html_safe, new_user_session_path %></li>
       <% end %>
     </ul>
     <div class="nav-collapse collapse">
       <ul class="nav">
-        <li<%= ' class="active"'.html_safe if current_page?(root_path) %>>
-        <%= link_to "<i class='icon-home icon-large'></i> Home".html_safe, root_path %>
-        </li>
         <li<%= ' class="active"'.html_safe if current_page?(events_path) %>>
         <%= link_to "<i class='icon-calendar icon-large'></i> Events".html_safe, events_path %>
         </li>

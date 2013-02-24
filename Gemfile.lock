@@ -311,7 +311,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   jquery-rails
-  newrelic_rpm
+  newrelic_rpm (~> 3.5.5.38)
   omniauth
   omniauth-facebook
   omniauth-twitter

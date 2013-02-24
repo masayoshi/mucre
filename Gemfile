@@ -22,7 +22,7 @@ gem 'twitter'
 gem 'fb_graph'
 gem 'paperclip'
 gem 'aws-sdk'
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', "~> 3.5.5.38"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

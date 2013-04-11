@@ -73,6 +73,7 @@ class EventsController < ApplicationController
             link: url_for(controller: "events",action: "show", id: @event)
           )
         end
+        NotificationMailer.event_registration_notification(@event).deliver
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else

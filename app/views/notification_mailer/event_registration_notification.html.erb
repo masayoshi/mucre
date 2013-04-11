@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Eventが登録されました</h1>
+<p><%= link_to @event.title, event_url(@event) %></p>
+<p>Posted by <%= link_to image_tag(@event.user.image_url, class: "small_avator img-rounded"), artist_url(@event.user.username) %> <%= link_to @event.user.username,  artist_url(@event.user.username) %> at <%= @event.created_at.to_s(:db) %>
+</p>
+</body>
+</html>

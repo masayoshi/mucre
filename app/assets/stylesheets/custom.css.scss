@@ -53,7 +53,12 @@ body {
 }
 
 /*Wrokaround for twitter bootstrap & google map*/
-.map_container img { max-width: none; width: auto; display:inline; }
+#map img {
+  max-width: none;
+}
+#map label {
+  width: auto; display:inline;
+}
 
 .label-close {
   font-size: 13px;

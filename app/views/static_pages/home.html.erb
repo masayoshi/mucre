@@ -1,24 +1,133 @@
 <div class="row">
-  <div class="span6">
-    <h1>SPOT<small>は</small></h1>
-    <h2>アートイベント情報サイト<small>です</small></h2>
-    <p class="lead">
-    ユーザの方はカレンダーのアイコンからアートイベントを見つけてください。<br />
-    アーティストの方はアーティスト登録してイベントをプロモーションしてください。
+  <div class="span12">
+    <h1>SPOTはアートイベントの情報サイトです</h1>
+    <p class="lead">誰でも無料でお気に入りのイベントを見つける事ができます。<p>
+    <%= link_to "<i class='icon-search'></i> イベントを探す".html_safe, events_path, class: "btn btn-large"%>
     </p>
+    <p class="lead">イベントの宣伝は無料のアーティスト登録から行えます。</p>
     <p>
     <%= link_to "<i class='icon-user'></i> アーティスト登録する (無料)".html_safe, new_user_registration_path, class: "btn btn-primary btn-large"%>
     </p>
     <p>すでにアカウントをお持ちの方はこちらから<%= link_to "<i class='icon-signin icon-large'></i> Sign in".html_safe, new_user_session_path %></p>
   </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="span4">
+    <h3>簡単、すぐ、告知</h3>
+    <h4>あなたのイベント告知をサポート</h4>
+    <p>
+    あなたがアーティストなら
+    <br/>
+    簡単に自分のイベント告知を行えます！
+    </p>
+  </div>
+  <div class="span4">
+    <h3>簡単、すぐ、見つける</h3>
+    <h4>あなたの芸術ライフをサポート</h4>
+    <p>
+    あなたがアートを愛するオーディエンスなら
+    <br>
+    お気に入りのイベントを探し出せます！
+    </p>
+  </div>
+  <div class="span4">
+    <h3>サイト利用はすべて無料</h3>
+    <h4>告知するアーティストも探すユーザーも</h4>
+    <p>
+    本サイトのサービス利用はすべて無料
+    <br/>
+    思う存分使ってください！
+    </p>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="span12">
+    <h1>アート情報配信サイトATTRACTで宣伝されよう！</h1>
+    <p>
+    当サイトに登録されたイベントは、芸術を愛するオーディエンスが集まるアート情報配信サイトATTRACTにおいてランダムに紹介されます。
+    <%= link_to image_tag("SS15.png"), "http://museum-created.heroku.com/", alt: "Attract", target: "_blank", class: "image-rounded" %>
+    </p>
+  </div>
+</div>
+<hr/>
+<div class="row">
   <div class="span6">
-    <div class="well" align="center">
-      <h2>アートイベントを探す</h2>
+    <div class="well">
+      <h2>イベント告知をするアーティストの使い方</h2>
+      <%= image_tag "SS1.png", alt: "registration_button" %>
       <p>
-      <div style="font-size: 250px;line-height: 1;  text-shadow: 2px 2px 2px #333333;">
-        <%= link_to "<i class='icon-calendar'></i>".html_safe, events_path %>
-      </div>
+      アーティスト登録する（無料）ボタンをクリックします。
       </p>
+      <br>
+      <%= image_tag "SS2.png", alt: "registration_page" %>
+      <p>
+      以下のいずれかの方法でアーティスト登録します。<br/>
+      1.左側のフォームに情報を入力し「Sign up」をクリックする。<br/>
+      2.Twitter、Facebookのアカウントを使用する。（右側の「Sign up with ○○」をクリック）
+      </p>
+      <br>
+      <%= image_tag "SS3.png", alt: "events_list_page" %>
+      <p>
+      アーティスト登録が完了するとイベント一覧画面が表示されます。<br/>
+      新しいイベントを登録するには右上の「New Event」をクリックします。
+      </p>
+      <br/>
+      <%= image_tag "SS4.png", alt: "events_registration_page" %>
+      <p>
+      イベント情報を入力し、「登録」をクリックします。<br/>
+      "みんなに宣伝”欄には連携しているSNSサービスが表示され、登録の際、チェックしておくことで該当のサービスにイベントページへのリンクを自動で投稿します。
+      </p>
+      <br/>
+      <p>
+      <%= link_to "<i class='icon-user'></i> アーティスト登録する (無料)".html_safe, new_user_registration_path, class: "btn btn-primary btn-large"%>
+      </p>
+    </div>
+  </div>
+  <div class="span6">
+    <div class="well">
+      <h2>イベントを探すオーディエンスの使い方</h2>
+      <%= image_tag "SS12.png", alt: "events_button" %>
+      <p>
+      「Events」をクリックします。
+      </p>
+      <br>
+      <%= image_tag "SS6.png", alt: "map" %>
+      <p>
+      イベントが地図上に表示され、そこから探す事ができます。
+      </p>
+      <br>
+      <%= image_tag "SS7.png", alt: "search_bar" %>
+      <p>
+      右側の条件検索を使えばさらにあなたに合ったイベントを見つけ易くなるでしょう。
+      </p>
+      <br/>
+      <%= image_tag "SS8.png", alt: "search_condition" %>
+      <p>
+      表示条件には現在設定されている表示条件が確認できます。
+      </p>
+      <br/>
+      <%= image_tag "SS9.png", alt: "refine_search" %>
+      <p>
+      条件で絞り込むには「開催日時」「料金」でそれぞれ絞り込みができます。
+      </p>
+      <br/>
+      <%= image_tag "SS10.png", alt: "tag_search" %>
+      <p>
+      タグで絞り込むでは各イベントに任意で登録されたタグ一覧が表示されます。<br/>
+      気になるタグをクリックしましょう。 <br/>
+      タグは複数選択可能です。
+      </p>
+      <br/>
+      <%= image_tag "SS11.png", alt: "tag_search_condition" %>
+      <p>
+      選択したタグは表示条件欄にて確認できます。<br>
+      タグでの絞り込みを解除したい場合は、タグについている「×」をクリックします。
+      </p>
+      <br/>
+      <p>
+      <%= link_to "<i class='icon-search'></i> イベントを探す".html_safe, events_path, class: "btn btn-large"%>
     </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 Mucre::Application.routes.draw do
 
+  resources :spots
   resources :events
 
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"} do

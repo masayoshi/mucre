@@ -31,6 +31,9 @@
         <li<%= ' class="active"'.html_safe if current_page?(events_path) %>>
         <%= link_to "<i class='icon-calendar icon-large'></i> Events".html_safe, events_path %>
         </li>
+        <li<%= ' class="active"'.html_safe if current_page?(spots_path) %>>
+        <%= link_to "<i class='icon-map-marker icon-large'></i> Spots".html_safe, spots_path %>
+        </li>
         <li<%= ' class="active"'.html_safe if current_page?(artists_path) %>>
         <%= link_to "<i class='icon-group icon-large'></i> Artists".html_safe, artists_path %>
         </li>

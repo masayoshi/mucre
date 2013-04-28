@@ -63,7 +63,7 @@
         <dt>住所</dt>
         <dd><%= @event.address %></dd>
       </dl>
-      <%= gmaps4rails(@json) %>
+      <%= gmaps(@gmaps_options) %>
     </div>
     <div class="well">
       <h4><i class="icon-money"></i> 料金</h4>

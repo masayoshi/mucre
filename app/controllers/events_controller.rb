@@ -32,7 +32,17 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    @json = Event.find(params[:id]).to_gmaps4rails
+    @gmaps_options = {
+      "map_options" => {
+        "auto_zoom" => false,
+        "zoom" => 13,
+        "center_latitude" => @event.latitude,
+        "center_longitude" => @event.longitude
+      },
+      "markers" => {
+        "data" => @event.to_gmaps4rails
+      }
+    }
 
     respond_to do |format|
       format.html # show.html.erb

@@ -25,7 +25,106 @@
       <span class="help-block">会場の住所を入力してください</span>
     </div>
   </div>
+  <%= f.hidden_field :longitude %>
+  <%= f.hidden_field :latitude %>
   <div class="form-actions">
     <%= f.submit "登録", class: "btn btn-primary" %>
   </div>
 <% end %>
+<%= gmaps(@gmaps_options) %>
+<script>
+<!--
+
+jQuery(document).ready(function($) {
+  // This disable submiting the form with the ENTER key only for inputs and selects
+  $('input,select').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+function initialize() {
+  <% if @spot.id.present? %>
+    var mapOptions = {
+      center: new google.maps.LatLng(<%= @spot.latitude %>, <%= @spot.longitude %>),
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    // create marker
+    marker = new google.maps.Marker({
+      map: map,
+      position: map.center
+    });
+  <% else %>
+    // set tokyo as default location
+    var mapOptions = {
+      center: new google.maps.LatLng(35.681382, 139.76608399999998),
+      zoom: 6,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  <% end %>
+
+  var input = /** @type {HTMLInputElement} */(document.getElementById('spot_address'));
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map
+  });
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    input.className = '';
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      // Inform the user that the place was not found and return.
+      input.className = 'notfound';
+      return;
+    }
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    marker.setIcon(/** @type {google.maps.Icon} */({
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(35, 35)
+    }));
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+    infowindow.open(map, marker);
+
+    // set latitude and longitude
+    document.getElementById("spot_latitude").value = place.geometry.location.lat();
+    document.getElementById("spot_longitude").value = place.geometry.location.lng();
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+//-->
+</script>

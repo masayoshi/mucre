@@ -19,13 +19,15 @@
 #
 
 class Event < ActiveRecord::Base
-  attr_accessible :address, :description, :end_datetime, :fee, :latitude, :longitude, :place, :start_datetime, :title, :url, :user_id
+  attr_accessible :address, :description, :end_datetime, :fee, :latitude, :longitude, :place, :start_datetime, :title, :url, :user_id, :spot_id
   attr_accessible :tag_list, :image
 
   attr_accessor :start_date, :start_time, :end_date, :end_time
   attr_accessible :start_date, :start_time, :end_date, :end_time
 
   belongs_to :user
+  belongs_to :spot
+
   geocoded_by :address
   validates :title, :place, :address, :fee, :description, :latitude, :longitude, :start_datetime, :end_datetime, :user_id,  presence: true
   validates_format_of :start_time, :end_time, with: /\d{1,2}:\d{2}/

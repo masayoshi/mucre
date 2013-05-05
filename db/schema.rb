@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428012304) do
+ActiveRecord::Schema.define(:version => 20130505185050) do
 
   create_table "authentications", :force => true do |t|
     t.string    "provider",   :null => false
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130428012304) do
     t.string    "image_content_type"
     t.integer   "image_file_size"
     t.timestamp "image_updated_at"
+    t.integer   "spot_id"
   end
 
   add_index "events", ["end_datetime"], :name => "index_events_on_end_datetime"

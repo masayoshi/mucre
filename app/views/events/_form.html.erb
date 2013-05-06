@@ -39,20 +39,22 @@
       <p class="help-block">イベントの開始、終了時間を登録してください。</p>
     </div>
   </div>
+<%= f.fields_for :spot do |ff| %>
   <div class="control-group">
-    <%= f.label :place, "会場", class: "control-label" %>
+    <%= ff.label :name, "会場", class: "control-label" %>
     <div class="controls">
-      <%= f.text_field :place, placeholder: "Event Place" %>
+      <%= ff.text_field :name, placeholder: "Event Place" %>
       <span class="help-block">イベント会場を入力してください</span>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :address, "会場住所", class: "control-label" %>
+    <%= ff.label :address, "会場住所", class: "control-label" %>
     <div class="controls">
-      <%= f.text_field :address, placeholder: "Address", class: "input-xlarge" %>
+      <%= ff.text_field :address, placeholder: "Address", class: "input-xxlarge" %>
       <span class="help-block">会場の住所を入力してください</span>
     </div>
   </div>
+<% end %>
   <div class="control-group">
     <%= f.label :description, "イベント詳細", class: "control-label" %>
     <div class="controls">
@@ -114,10 +116,14 @@
   </div>
 <% end %>
 <script type="text/javascript">
+<!--
+
   $(function() {
       return $('#event_tag_list').select2({
         tags: <%= Event.tag_counts.map(&:name).to_json.html_safe %>,
         tokenSeparators: [",", " ", "+"]
       });
     });
+
+//-->
 </script>

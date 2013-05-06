@@ -20,8 +20,15 @@ Mucre::Application.routes.draw do
   root to: 'static_pages#home'
 end
 #== Route Map
-# Generated on 03 Nov 2012 23:11
+# Generated on 05 May 2013 16:18
 #
+#                          POST   /spots(.:format)                       spots#create
+#                 new_spot GET    /spots/new(.:format)                   spots#new
+#                edit_spot GET    /spots/:id/edit(.:format)              spots#edit
+#                     spot GET    /spots/:id(.:format)                   spots#show
+#                          PUT    /spots/:id(.:format)                   spots#update
+#                          DELETE /spots/:id(.:format)                   spots#destroy
+#                   events GET    /events(.:format)                      events#index
 #                          POST   /events(.:format)                      events#create
 #                new_event GET    /events/new(.:format)                  events#new
 #               edit_event GET    /events/:id/edit(.:format)             events#edit

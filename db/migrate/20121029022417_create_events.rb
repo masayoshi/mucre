@@ -2,10 +2,6 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.string :title
-      t.string :place
-      t.string :address
-      t.float :latitude
-      t.float :longitude
       t.text :description
       t.string :url
       t.integer :fee, null: false, default: 0

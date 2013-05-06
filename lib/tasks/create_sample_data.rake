@@ -33,12 +33,16 @@ def make_events
       user.events.create(title: Faker::Lorem.sentence(5),
                          description: Faker::Lorem.sentence(10),
                          fee: rand(10000),
-                         place: Faker::Lorem.sentence(3),
                          url: ("http://www." + Faker::Internet.domain_name),
                          tag_list: Faker::Lorem.words(5).join(','),
                          start_datetime: start_datetime,
-                         end_datetime: end_datetime,
-                         address: (Faker::Address.street_address + "," + Faker::Address.city + "," + Faker::Address.state))
+                         end_datetime: end_datetime)
     end
+  end
+
+  Event.all.each do |event|
+    @spot = Spot.where(address: (Faker::Address.street_address + "," + Faker::Address.city + "," + Faker::Address.state)).first_or_create!(name: Faker::Lorem.sentence(3))
+    event.spot = @spot
+    event.save
   end
 end

@@ -2,34 +2,36 @@
 #
 # Table name: events
 #
-#  id             :integer          not null, primary key
-#  title          :string(255)
-#  place          :string(255)
-#  address        :string(255)
-#  latitude       :float
-#  longitude      :float
-#  description    :text
-#  url            :string(255)
-#  fee            :integer          default(0), not null
-#  start_datetime :datetime
-#  end_datetime   :datetime
-#  user_id        :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id                 :integer          not null, primary key
+#  title              :string(255)
+#  description        :text
+#  url                :string(255)
+#  fee                :integer          default(0), not null
+#  start_datetime     :datetime
+#  end_datetime       :datetime
+#  user_id            :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  spot_id            :integer
 #
 
 class Event < ActiveRecord::Base
-  attr_accessible :address, :description, :end_datetime, :fee, :latitude, :longitude, :place, :start_datetime, :title, :url, :user_id, :spot_id
+  attr_accessible :description, :end_datetime, :fee, :start_datetime, :title, :url, :user_id
   attr_accessible :tag_list, :image
+  attr_accessible :spot_id, :spot_attributes
 
   attr_accessor :start_date, :start_time, :end_date, :end_time
   attr_accessible :start_date, :start_time, :end_date, :end_time
 
   belongs_to :user
   belongs_to :spot
+  accepts_nested_attributes_for :spot
 
-  geocoded_by :address
-  validates :title, :place, :address, :fee, :description, :latitude, :longitude, :start_datetime, :end_datetime, :user_id,  presence: true
+  validates :title, :fee, :description,:start_datetime, :end_datetime, :user_id,  presence: true
   validates_format_of :start_time, :end_time, with: /\d{1,2}:\d{2}/
 
   validates_attachment_size :image, less_than: 3.megabytes
@@ -38,9 +40,7 @@ class Event < ActiveRecord::Base
   after_initialize :get_datetimes
   before_validation :set_datetimes
 
-  before_validation :geocode, if: :address_changed?
   acts_as_taggable
-  acts_as_gmappable process_geocoding: false
 
   self.per_page = 20
 
@@ -105,13 +105,7 @@ class Event < ActiveRecord::Base
     self.end_datetime = "#{self.end_date} #{self.end_time}" # convert the two fields back to db
   end
 
-  def gmaps4rails_address
-    address
-  end
-
-  def gmaps4rails_infowindow
-    result = "<h2>#{title}</h2>"
-    result += "<p>#{description}</p><br>" if description.present?
-    result += "<a href='/artists/#{self.user.username}'>#{self.user.username}</a>"
+  def spot_attributes=(spot_attributes)
+    self.spot = Spot.where(address: spot_attributes[:address]).first_or_create(name: spot_attributes[:name])
   end
 end

@@ -55,6 +55,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event.build_spot
+    @gmaps_options = { map_options: { libraries: ["places"] } }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,6 +66,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = current_user.events.find(params[:id])
+    @gmaps_options = { map_options: { libraries: ["places"] } }
   end
 
   # POST /events

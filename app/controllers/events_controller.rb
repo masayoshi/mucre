@@ -11,7 +11,7 @@ class EventsController < ApplicationController
       if @artist.present?
         @events = @artist.events.refine_search(params).paginate(page: params[:page])
         @tags = @artist.events.refine_search(params).tag_counts
-        @json = @artist.events.refine_search(params).all.collect{|event| event.spot }.to_gmaps4rails
+        @json = @artist.events.refine_search(params).all.collect{|event| event.spot }.to_gmaps4rails  if @artist.events.refine_search(params).present?
       else
         redirect_to events_path, alert: "ご指定のアーティストは見つかりませんでした"
         return
@@ -19,7 +19,7 @@ class EventsController < ApplicationController
     else
       @events = Event.refine_search(params).paginate(page: params[:page])
       @tags = Event.refine_search(params).tag_counts
-      @json = Event.refine_search(params).all.collect{|event| event.spot }.to_gmaps4rails
+      @json = Event.refine_search(params).all.collect{|event| event.spot }.to_gmaps4rails if Event.refine_search(params).present?
     end
 
     respond_to do |format|

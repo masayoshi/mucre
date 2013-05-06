@@ -39,7 +39,6 @@ class SpotsController < ApplicationController
   # GET /spots/new.json
   def new
     @spot = Spot.new
-    @gmaps_options = { map_options: { libraries: ["places"] } }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,7 +49,6 @@ class SpotsController < ApplicationController
   # GET /spots/1/edit
   def edit
     @spot = Spot.find(params[:id])
-    @gmaps_options = { map_options: { libraries: ["places"] } }
   end
 
   # POST /spots

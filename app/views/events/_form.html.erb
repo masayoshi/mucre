@@ -52,7 +52,9 @@
     <div class="controls">
       <%= ff.text_field :address, class: "input-xxlarge", placeholder: "Address" %>
       <span class="help-block">会場の住所を入力してください</span>
-      <%= gmaps(@gmaps_options) %>
+      <div class="map_container">
+        <div id="map" class="gmaps4rails_map"></div>
+      </div>
     </div>
   </div>
   <%= ff.hidden_field :longitude %>
@@ -118,6 +120,7 @@
     <%= f.submit "登録", class: "btn btn-primary" %>
   </div>
 <% end %>
+<script src="//maps.google.com/maps/api/js?v=3.8&sensor=false&client=&key=&libraries=geometry,places&language=&hl=&region=" type="text/javascript"></script>
 <script type="text/javascript">
 <!--
 

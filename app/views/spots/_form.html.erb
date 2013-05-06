@@ -23,6 +23,7 @@
     <div class="controls">
       <%= f.text_field :address, placeholder: "Address", class: "input-xxlarge" %>
       <span class="help-block">会場の住所を入力してください</span>
+      <%= gmaps(@gmaps_options) %>
     </div>
   </div>
   <%= f.hidden_field :longitude %>
@@ -31,7 +32,6 @@
     <%= f.submit "登録", class: "btn btn-primary" %>
   </div>
 <% end %>
-<%= gmaps(@gmaps_options) %>
 <script>
 <!--
 

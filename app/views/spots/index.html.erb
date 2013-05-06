@@ -1,16 +1,16 @@
 <div class="row">
   <div class="span12">
     <div class="page-header">
-      <h2>Listing Spots<small> 会場一覧</small></h2>
+      <h2>Listing spots<small> 会場一覧</small></h2>
     </div>
     <% if @spots.present? %>
       <div align="center">
         <%= gmaps4rails(@json) %>
       </div>
       <%= render @spots %>
+      <%= will_paginate @spots %>
     <% else %>
       <p>該当する会場は存在しません</p>
     <% end %>
   </div>
 </div>
-<%= link_to 'New Spot', new_spot_path %>

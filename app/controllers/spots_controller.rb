@@ -4,7 +4,7 @@ class SpotsController < ApplicationController
   # GET /spots
   # GET /spots.json
   def index
-    @spots = Spot.all
+    @spots = Spot.paginate(page: params[:page])
     @json = Spot.all.to_gmaps4rails
 
     respond_to do |format|

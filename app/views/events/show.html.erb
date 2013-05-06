@@ -59,7 +59,7 @@
       <h4><i class="icon-map-marker"></i> 会場情報</h4>
       <dl>
         <dt>会場</dt>
-        <dd><%= @event.spot.name %></dd>
+        <dd><%= link_to @event.spot.name, spot_path(@event.spot) %></dd>
         <dt>住所</dt>
         <dd><%= @event.spot.address %></dd>
       </dl>

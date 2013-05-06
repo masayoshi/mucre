@@ -58,7 +58,7 @@ class Event < ActiveRecord::Base
   scope :sort_condition, lambda { |sort|
     case sort
     when "rd"
-      order "created_at DESC"
+      order "events.created_at DESC"
     else
       order "start_datetime ASC"
     end

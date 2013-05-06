@@ -4,10 +4,6 @@
     <blockquote>
       <p><%= spot.address %></p>
     </blockquote>
-    <% if user_signed_in? %>
-      <%= link_to "<i class='icon-edit'></i> 編集".html_safe, edit_spot_path(spot), class: "btn btn-mini" %>
-      <%= link_to "<i class='icon-trash'></i> 削除".html_safe ,spot_path(spot), confirm: '本当に削除しますか？', method: :delete, class: "btn btn-mini btn-danger" %>
-    <% end %>
     <div class="page-header"></div>
   </div>
 </div>

@@ -30,6 +30,6 @@ class Spot < ActiveRecord::Base
   end
 
   def gmaps4rails_infowindow
-    result = "<h2>#{name}</h2>"
+    result = "<h3>#{name}</h3><p>#{address}</p>"
   end
 end

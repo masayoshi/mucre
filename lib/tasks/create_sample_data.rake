@@ -30,13 +30,16 @@ def make_events
     10.times do
       start_datetime = Time.now + rand(1000).hours
       end_datetime = start_datetime + 3.hours
+      @spot = Spot.where(address: (Faker::Address.street_address + "," + Faker::Address.city + "," + Faker::Address.state)).first_or_create!(name: Faker::Lorem.sentence(3))
       user.events.create(title: Faker::Lorem.sentence(5),
                          description: Faker::Lorem.sentence(10),
                          fee: rand(10000),
                          url: ("http://www." + Faker::Internet.domain_name),
                          tag_list: Faker::Lorem.words(5).join(','),
                          start_datetime: start_datetime,
-                         end_datetime: end_datetime)
+                         end_datetime: end_datetime,
+                         spot_id: @spot.id
+                        )
     end
   end
 

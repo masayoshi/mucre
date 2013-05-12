@@ -3,7 +3,7 @@
     <div class="tile">
       <h1>SPOTはアートイベントの情報サイトです</h1>
       <p class="lead">誰でも無料でお気に入りのイベントを見つける事ができます。<p>
-      <%= link_to "<i class='icon-search'></i> イベントを探す".html_safe, events_path, class: "btn btn-large"%>
+      <%= link_to "<i class='icon-search'></i> イベントを探す".html_safe, events_path, class: "btn btn-primary btn-large"%>
       </p>
       <p class="lead">イベントの宣伝は無料のアーティスト登録から行えます。</p>
       <p>
@@ -42,8 +42,8 @@
   <div class="span4">
     <div class="text-center">
       <%= image_tag "icon-desktop.jpg", alt: "icon-desktop", class: "img-circle" %>
-      <h3>サイト利用はすべて無料</h3>
-      <h4>告知するアーティストも探すユーザーも</h4>
+      <h3>利用はすべて無料</h3>
+      <h4>アーティストもユーザーも</h4>
       <p>
       本サイトのサービス利用はすべて無料
       <br/>
@@ -92,7 +92,7 @@
       </p>
       <br/>
       <p>
-      <%= link_to "<i class='icon-user'></i> アーティスト登録する (無料)".html_safe, new_user_registration_path, class: "btn btn-primary btn-large"%>
+      <%= link_to "<i class='icon-user'></i> アーティスト登録する".html_safe, new_user_registration_path, class: "btn btn-primary btn-large"%>
       </p>
     </div>
   </div>

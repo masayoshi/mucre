@@ -1,44 +1,55 @@
 <div class="row">
   <div class="span12">
-    <h1>SPOTはアートイベントの情報サイトです</h1>
-    <p class="lead">誰でも無料でお気に入りのイベントを見つける事ができます。<p>
-    <%= link_to "<i class='icon-search'></i> イベントを探す".html_safe, events_path, class: "btn btn-large"%>
-    </p>
-    <p class="lead">イベントの宣伝は無料のアーティスト登録から行えます。</p>
-    <p>
-    <%= link_to "<i class='icon-user'></i> アーティスト登録する (無料)".html_safe, new_user_registration_path, class: "btn btn-primary btn-large"%>
-    </p>
-    <p>すでにアカウントをお持ちの方はこちらから<%= link_to "<i class='icon-signin icon-large'></i> Sign in".html_safe, new_user_session_path %></p>
+    <div class="tile">
+      <h1>SPOTはアートイベントの情報サイトです</h1>
+      <p class="lead">誰でも無料でお気に入りのイベントを見つける事ができます。<p>
+      <%= link_to "<i class='icon-search'></i> イベントを探す".html_safe, events_path, class: "btn btn-large"%>
+      </p>
+      <p class="lead">イベントの宣伝は無料のアーティスト登録から行えます。</p>
+      <p>
+      <%= link_to "<i class='icon-user'></i> アーティスト登録する".html_safe, new_user_registration_path, class: "btn btn-primary btn-large"%>
+      </p>
+      <p>すでにアカウントをお持ちの方はこちらから<%= link_to "<i class='icon-signin icon-large'></i> Sign in".html_safe, new_user_session_path %></p>
+    </div>
   </div>
 </div>
 <hr/>
 <div class="row">
   <div class="span4">
-    <h3>簡単、すぐ、告知</h3>
-    <h4>あなたのイベント告知をサポート</h4>
-    <p>
-    あなたがアーティストなら
-    <br/>
-    簡単に自分のイベント告知を行えます！
-    </p>
+    <div class="text-center">
+      <%= image_tag "icon-chat.jpg", alt: "icon-chat", class: "img-circle" %>
+      <h3>簡単、すぐ、告知</h3>
+      <h4>あなたのイベント告知をサポート</h4>
+      <p>
+      あなたがアーティストなら
+      <br/>
+      簡単に自分のイベント告知を行えます！
+      </p>
+    </div>
   </div>
   <div class="span4">
-    <h3>簡単、すぐ、見つける</h3>
-    <h4>あなたの芸術ライフをサポート</h4>
-    <p>
-    あなたがアートを愛するオーディエンスなら
-    <br>
-    お気に入りのイベントを探し出せます！
-    </p>
+    <div class="text-center">
+      <%= image_tag "icon-find.jpg", alt: "icon-find", class: "img-circle" %>
+      <h3>簡単、すぐ、見つける</h3>
+      <h4>あなたの芸術ライフをサポート</h4>
+      <p>
+      あなたがアートを愛するオーディエンスなら
+      <br>
+      お気に入りのイベントを探し出せます！
+      </p>
+    </div>
   </div>
   <div class="span4">
-    <h3>サイト利用はすべて無料</h3>
-    <h4>告知するアーティストも探すユーザーも</h4>
-    <p>
-    本サイトのサービス利用はすべて無料
-    <br/>
-    思う存分使ってください！
-    </p>
+    <div class="text-center">
+      <%= image_tag "icon-desktop.jpg", alt: "icon-desktop", class: "img-circle" %>
+      <h3>サイト利用はすべて無料</h3>
+      <h4>告知するアーティストも探すユーザーも</h4>
+      <p>
+      本サイトのサービス利用はすべて無料
+      <br/>
+      思う存分使ってください！
+      </p>
+    </div>
   </div>
 </div>
 <hr/>

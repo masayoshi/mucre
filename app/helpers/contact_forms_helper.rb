@@ -1,2 +1,2 @@
-module ContactFormHelper
+module ContactFormsHelper
 end

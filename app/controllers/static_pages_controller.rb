@@ -7,7 +7,4 @@ class StaticPagesController < ApplicationController
 
   def policy
   end
-
-  def help
-  end
 end

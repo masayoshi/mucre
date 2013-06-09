@@ -1,5 +1,26 @@
-<p>Welcome <%= @resource.email %>!</p>
+<%= @resource.username %> さん
 
-<p>You can confirm your account email through the link below:</p>
+ようこそ 【SPOT】 へ！
+ご登録ありがとうございます！
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+●登録情報●
+Username : <%= @resource.username %>
+E-mail : <%= @resource.email %>
+
+↓ の URL をクリックすると登録が完了します。
+<%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>
+
+
+【SPOT】 の使い方はトップページを参照してください。
+<%= link_to 'http://mucre-staging.herokuapp.com/', 'http://mucre-staging.herokuapp.com/', target: '_blank' %>
+
+
+※本メールに心当たりがない場合には、上記の URL はクリックしないでください。
+
+※本メールは自動配信されています。
+
+※本メールにご返信をいただきましても、ご質問・ご依頼などには
+お答えできませんので、あらかじめご了承ください。
+
+※何かご不明な点がありましたら、
+お手数ですが <%= mail_to 'info@mu-cre.com', encode: 'hex' %> までお問い合わせください。

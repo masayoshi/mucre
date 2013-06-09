@@ -1,26 +1,23 @@
-<%= @resource.username %> さん
-
-ようこそ 【SPOT】 へ！
-ご登録ありがとうございます！
-
-●登録情報●
-Username : <%= @resource.username %>
-E-mail : <%= @resource.email %>
-
-↓ の URL をクリックすると登録が完了します。
-<%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>
-
-
-【SPOT】 の使い方はトップページを参照してください。
-<%= link_to 'http://mucre-staging.herokuapp.com/', 'http://mucre-staging.herokuapp.com/', target: '_blank' %>
-
-
-※本メールに心当たりがない場合には、上記の URL はクリックしないでください。
-
-※本メールは自動配信されています。
-
-※本メールにご返信をいただきましても、ご質問・ご依頼などには
-お答えできませんので、あらかじめご了承ください。
-
-※何かご不明な点がありましたら、
-お手数ですが <%= mail_to 'info@mu-cre.com', encode: 'hex' %> までお問い合わせください。
+<%= @resource.username %> さん<br />
+<br />
+ようこそ 【SPOT】 へ！<br />
+ご登録ありがとうございます！<br />
+<br />
+●登録情報●<br />
+Username : <%= @resource.username %><br />
+E-mail : <%= @resource.email %><br />
+<br />
+↓ の URL をクリックすると登録が完了します。<br />
+<%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %><br />
+<br />
+【SPOT】 の使い方はトップページを参照してください。<br />
+<%= link_to 'http://mucre-staging.herokuapp.com/', 'http://mucre-staging.herokuapp.com/', target: '_blank' %><br />
+<br />
+<br />
+※本メールに心当たりがない場合には、上記の URL はクリックしないでください。<br />
+<br />
+※本メールは自動配信されています。<br />
+<br />
+※本メールにご返信をいただきましても、ご質問・ご依頼などにはお答えできませんので、あらかじめご了承ください。<br />
+<br />
+※何かご不明な点がありましたら、お手数ですが <%= mail_to 'info@mu-cre.com', encode: 'hex' %> までお問い合わせください。<br />

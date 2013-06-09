@@ -1,0 +1,38 @@
+<%= form_for(@contact_form, html: {class: "form-horizontal"}) do |f| %>
+  <% if @contact_form.errors.any? %>
+    <div class="alert alert-block alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong><%= pluralize(@contact_form.errors.count, "error") %> prohibited delivering this message:</strong>
+
+      <ul>
+        <% @contact_form.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="control-group">
+    <%= f.label :name, "お名前", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name, placeholder: "Name", class: "input-xxlarge" %>
+      <span class="help-block">お名前を入力してください</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, "メールアドレス", class: "control-label" %>
+    <div class="controls">
+      <%= f.email_field :email, placeholder: "Email Address", class: "input-xxlarge"  %>
+      <span class="help-block">ご連絡先のEメールアドレスを入力してください</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :message, "お問い合わせ内容", class: "control-label" %>
+    <div class="controls">
+      <%= f.text_area :message, placeholder: "Message", class: "input-xxlarge" %>
+      <p class="help-block">お問い合せ内容を記述してください</p>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "送信", class: "btn btn-primary" %>
+  </div>
+<% end %>

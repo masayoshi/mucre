@@ -23,6 +23,7 @@ gem 'fb_graph'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'newrelic_rpm', "~> 3.5.5.38"
+gem 'mail_form'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

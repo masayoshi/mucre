@@ -1,5 +1,6 @@
 Mucre::Application.routes.draw do
 
+  resources :contact_forms, only: [:new, :create]
   resources :spots
   resources :events
 
@@ -16,12 +17,14 @@ Mucre::Application.routes.draw do
 
   match '/about', to: 'static_pages#about', via: :get
   match '/policy', to: 'static_pages#policy', via: :get
-  match '/help', to: 'static_pages#help', via: :get
+  match '/contact', to: 'contact_forms#new', via: :get
   root to: 'static_pages#home'
 end
 #== Route Map
-# Generated on 05 May 2013 16:18
+# Generated on 09 Jun 2013 13:32
 #
+#         new_contact_form GET    /contact_forms/new(.:format)           contact_forms#new
+#                    spots GET    /spots(.:format)                       spots#index
 #                          POST   /spots(.:format)                       spots#create
 #                 new_spot GET    /spots/new(.:format)                   spots#new
 #                edit_spot GET    /spots/:id/edit(.:format)              spots#edit
@@ -61,5 +64,5 @@ end
 #          settings_update PUT    /settings/update(.:format)             settings#update
 #                    about GET    /about(.:format)                       static_pages#about
 #                   policy GET    /policy(.:format)                      static_pages#policy
-#                     help GET    /help(.:format)                        static_pages#help
+#                  contact GET    /contact(.:format)                     contact_forms#new
 #                     root        /                                      static_pages#home

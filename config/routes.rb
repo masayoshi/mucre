@@ -1,7 +1,9 @@
 Mucre::Application.routes.draw do
 
   resources :contact_forms, only: [:new, :create]
-  resources :spots
+  resources :spots do
+    resources :events, only: [:new]
+  end
   resources :events
 
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"} do

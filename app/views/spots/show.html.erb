@@ -7,8 +7,10 @@
       <dt>住所</dt>
       <dd><%= @spot.address %></dd>
     </dl>
-    <%= gmaps(@gmaps_options) %>
     <%= link_to "<i class='icon-edit'></i> 編集".html_safe, edit_spot_path(@spot), class: "btn" if user_signed_in? %>
+    <hr />
+    <%= gmaps(@gmaps_options) %>
+    <%= link_to "<i class='icon-pencil'></i> このSPOTでイベントを登録する".html_safe, new_spot_event_path(@spot), class: "btn btn-primary" if user_signed_in? %>
     <% if @spot.events.present? %>
     <div class="page-header">
       <h4>過去のイベント一覧</h4>

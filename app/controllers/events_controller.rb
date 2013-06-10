@@ -54,7 +54,12 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     @event = Event.new
-    @event.build_spot
+
+    if params[:spot_id] && Spot.find_by_id(params[:spot_id])
+      @event.spot = Spot.find_by_id(params[:spot_id])
+    else
+      @event.build_spot
+    end
 
     respond_to do |format|
       format.html # new.html.erb
